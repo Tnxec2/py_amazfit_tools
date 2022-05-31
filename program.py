@@ -174,28 +174,28 @@ class Parser:
 
         states = Parser.getPreviewStates(outputDirectory)
         logging.debug("Generating states done...")
-        staticPreview = PreviewGenerator.createImage(parameters, images, WatchState())
+        #staticPreview = PreviewGenerator.createImage(parameters, images, WatchState())
         logging.debug("Generating static preview gen done...")
-        staticPreview.save(os.path.join(outputDirectory, f"{baseName}_static.png"))
+        #staticPreview.save(os.path.join(outputDirectory, f"{baseName}_static.png"))
 
         # generate small preview image for Preview section.
         from PIL import Image
         new_w, new_h = Config.getPreviewSize(), Config.getPreviewSize()
-        im_resized = staticPreview.resize((new_w, new_h), resample = Image.LANCZOS)
-        im_resized.save(os.path.join(outputDirectory, f"{baseName}_static_{Config.getPreviewSize()}.png"))
+        #im_resized = staticPreview.resize((new_w, new_h), resample = Image.LANCZOS)
+        #im_resized.save(os.path.join(outputDirectory, f"{baseName}_static_{Config.getPreviewSize()}.png"))
         logging.debug("Generating static preview save done...")
 
-        previewImages = PreviewGenerator.createAnimation(parameters, images, states)
+        #previewImages = PreviewGenerator.createAnimation(parameters, images, states)
         logging.debug("Generating anim preview gen done...")
 
         images = []
-        for previewImage in previewImages:
-            images.append(previewImage)
-        images[0].save(os.path.join(outputDirectory, f"{baseName}_animated.gif"),
-            save_all=True,
-            append_images=images[1:],
-            duration=1000,
-            loop=0)
+        #for previewImage in previewImages:
+        #    images.append(previewImage)
+        #images[0].save(os.path.join(outputDirectory, f"{baseName}_animated.gif"),
+        #    save_all=True,
+        #    append_images=images[1:],
+        #    duration=1000,
+        #    loop=0)
 
 
     @staticmethod
