@@ -73,12 +73,7 @@ class Reader():
             for x in range(self._width):
                 pixelColorIndex = reader.ReadBits(self._bitsPerPixel)
                 if (pixelColorIndex < len(self._palleteColorsArray)):
-                    pallete = self._palleteColorsArray[pixelColorIndex]
-                    color = resources.image.color.Color.fromArgb(
-                        a=int.from_bytes(pallete[3], byteorder='little'),
-                        r=int.from_bytes(pallete[0], byteorder='little'),
-                        g=int.from_bytes(pallete[1], byteorder='little'),
-                        b=int.from_bytes(pallete[2], byteorder='little'))
+                    color = self._palleteColorsArray[pixelColorIndex]
                     image.putpixel((x, y), color)
         return image
 
@@ -236,9 +231,8 @@ class Reader():
         self._bitsPerPixel = int.from_bytes(self._reader.read(2), byteorder='little')
         self._palleteColors = int.from_bytes(self._reader.read(2), byteorder='little')
         self._unknown1 = int.from_bytes(self._reader.read(2), byteorder='little')
-        self._transparency = False
-        if (self._unknown1):
-            self._transparency = True
+        self._transparency = self._unknown1 > 0
+
         logging.info("Image header was read:")
         logging.info(f"Width: {self._width}, Height: {self._height}, RowLength: {self._rowLengthInBytes}")
         logging.info(f"BPP: {self._bitsPerPixel}, palleteColors: {self._palleteColors}, Transparency: {self._transparency}")
@@ -246,12 +240,13 @@ class Reader():
         logging.info("Reading palette...")
         self._palleteColorsArray = []
         for item in range(self._palleteColors):
-            r = self._reader.read(1)
-            g = self._reader.read(1)
-            b = self._reader.read(1)
-            a = self._reader.read(1)
-            self._palleteColorsArray.append([r, g, b, a])
-            logging.info(f"Palette item {item}: R: {r.hex()}, G: {g.hex()}, B: {b.hex()}, A: {a.hex()}")
+            r = int.from_bytes(self._reader.read(1), byteorder='little')
+            g = int.from_bytes(self._reader.read(1), byteorder='little')
+            b = int.from_bytes(self._reader.read(1), byteorder='little')
+            self._reader.read(1) # // always 0 maybe padding
+            a = 0x00 if (self._transparency and item == 0) else 0xFF
+            self._palleteColorsArray.append( resources.image.color.Color.fromArgb(a, r, g, b) )
+            logging.info(f"Palette item {item}: R: {hex(r)}, G: {hex(g)}, B: {hex(b)}, A: {hex(a)}")
 
 
     def readHeader(self):
