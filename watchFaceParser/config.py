@@ -1,21 +1,6 @@
 class Config:
-    _is_gtr = False
-    _image_size = 360
-    _preview_size = 210
-
-
-    @staticmethod
-    def setGtrMode(gtr):
-        Config._is_gtr = gtr
-        if Config._is_gtr:
-            Config._image_size = 454
-            Config._preview_size = 266
-
-
-    @staticmethod
-    def isGtrMode():
-        return Config._is_gtr
-
+    _image_size = 178
+    _preview_size = 178
 
     @staticmethod
     def getImageSize():
