@@ -6,7 +6,7 @@ class BitReader():
     def __init__(self, stream):
         self._masks = [128, 192, 224, 240, 248, 252, 254, 255]
         self._stream = io.BytesIO(stream)
-        self._bitsRemaining = True
+        self._bitsRemaining = 0
         self._currentByte = 0
         self._isDataPresent = True
 
@@ -26,7 +26,7 @@ class BitReader():
             if (self._bitsRemaining == 0 and self._isDataPresent):
                 self.tryReadNext()
 
-            dataLength = length if (length < self._bitsRemaining) else self._bitsRemaining
+            dataLength = min(length, self._bitsRemaining)
 
             currentData = self._currentByte & self._masks[dataLength - 1]
             if (length > 8):
