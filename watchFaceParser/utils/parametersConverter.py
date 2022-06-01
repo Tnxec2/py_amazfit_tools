@@ -44,7 +44,10 @@ class ParametersConverter:
 
             propertyInfo = properties[_id]
             propertyType = propertyInfo['Type']
-
+            if isinstance(propertyInfo['Type'],list):
+                propertyType = propertyInfo['Type'][0]
+            else:
+                propertyType = propertyInfo['Type']	
             propertyValue = ParametersConverter.getValue(propertyInfo, serializable)
 
             if propertyValue is None:
@@ -85,14 +88,21 @@ class ParametersConverter:
         for parameter in descriptor:
             parameterId = parameter.getId()
             currentPath = str(parameterId) if not path else os.path.join(path, '.', str(parameterId))
+
             if parameterId not in properties:
                 logging.warn(f"[ParamConv:parse] currentPath {currentPath} / Parameter {parameterId} isn't supported for {currentType}")
                 raise IndexError(f"Parameter {parameterId} isn't supported for {currentType}")
 
             propertyInfo = properties[parameterId]
-            propertyType = propertyInfo['Type']
+            
+            if isinstance(propertyInfo['Type'],list):
+                propertyType = propertyInfo['Type'][0]
+            else:
+                propertyType = propertyInfo['Type']
 
             propertyInfoName = propertyInfo['Name']
+            string = (f"{currentPath}-{propertyInfoName}")
+            logging.debug(string.replace("\\",""))
 
             if propertyType == 'long' or propertyType == 'long?' or propertyType == TextAlignment  or propertyType == Color or propertyType == 'bool':
                 if propertyType == TextAlignment:
@@ -109,13 +119,68 @@ class ParametersConverter:
             elif propertyType == '[]':
                 assert(False) # not tested yet
             else:
-                tmp = propertyType()
+                tmp = propertyType()	
+                #childIsList = False
+                artmp = []
+                arrDict = {}
                 for x in parameter.getChildren():
+                   
+                    #if not childIsList:
+                        #childIsList = ParametersConverter.childIsList(propertyType, [x], currentPath)
+                    childIsList = ParametersConverter.childIsList(propertyType, [x], currentPath)
+
                     psd = ParametersConverter.parse(propertyType, [x], currentPath)
                     import json
 
                     for kk in psd.__dict__:
                         vv = psd.__dict__[kk]
-                        setattr(tmp, kk, vv)
+                        if not childIsList:
+                            attr = getattr(tmp, kk, "None")
+                            if (attr != "None"):
+                                 raise IndexError(f"Parameter {kk} already exist and it is not defined as array")
+                            setattr(tmp, kk, vv)
+                        else:
+                            #artmp.append(vv)
+                            if (not kk in arrDict):
+                                arrDict[kk] = []
+                            arrDict[kk].append(vv)
+                    #if childIsList:
+                    #    setattr(tmp, kk, artmp)
+                for x in arrDict:
+                    setattr(tmp, x, arrDict[x])
                 setattr(result, propertyInfoName, tmp)
         return result
+
+    @staticmethod
+    def childIsList(paramType, descriptor, path = ""):
+        assert(type(descriptor) == type([]))
+        assert(type(path) == type(""))
+        properties = ElementsHelper.sortedProperties(paramType)
+        currentType = paramType
+
+        for parameter in descriptor:
+            parameterId = parameter.getId()
+
+            currentPath = str(parameterId) if not path else os.path.join(path, '.', str(parameterId))
+
+            if parameterId not in properties:
+                logging.warn(f"[ParamConv:parse] currentPath {currentPath} / Parameter {parameterId} isn't supported for {currentType}")
+                raise IndexError(f"Parameter {parameterId} isn't supported for {currentType}")
+
+            propertyInfo = properties[parameterId]
+
+            if isinstance(propertyInfo['Type'],list):
+                childIsList = True
+            else:
+                childIsList = False
+        return childIsList
+
+    @staticmethod
+    def listParams(descriptor, path = ""):
+        for parameter in descriptor:
+            parameterId = parameter.getId()
+            currentPath = str(parameterId) if not path else path + '.' + str(parameterId)
+            logging.debug(f"{currentPath} Value: {parameter.getValue()}")
+            if ( parameter.getChildren() is not None):
+                for x in parameter.getChildren():
+                    ParametersConverter.listParams([x], currentPath)
