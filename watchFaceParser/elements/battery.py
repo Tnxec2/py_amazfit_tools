@@ -6,8 +6,6 @@ from watchFaceParser.elements.basicElements.circleScale import CircleScale
 class Battery:
     definitions = {
         1: { 'Name': 'Text', 'Type': Number},
-        2: { 'Name': 'Images', 'Type': ImageSet}, # gtr
-        6: { 'Name': 'Percent', 'Type': Image},
-        7: { 'Name': 'Scale', 'Type': CircleScale}, # verge
+        2: { 'Name': 'Icon', 'Type': ImageSet}, 
     }
 

@@ -20,8 +20,10 @@ def uint2int(n):
     return n
 
 def toSigned32(n):
-    n = n & 0xffffffff
-    return (n ^ 0x80000000) - 0x80000000
+    if n:
+        n = n & 0xffffffff
+        return (n ^ 0x80000000) - 0x80000000
+    return n
 
 class ParametersConverter:
     @staticmethod
@@ -100,8 +102,7 @@ class ParametersConverter:
                 elif propertyType == 'bool':
                     setattr(result, propertyInfoName, parameter.getValue() > 0)
                 elif propertyType == 'long':
-                    #setattr(result, propertyInfoName, ulong2long(parameter.getValue()))
-                    setattr(result, propertyInfoName, toSigned32(parameter.getValue())) 
+                    setattr(result, propertyInfoName, toSigned32(parameter.getValue() or None)) 
                 else:
                     setattr(result, propertyInfoName, ulong2long(parameter.getValue() or None))
 

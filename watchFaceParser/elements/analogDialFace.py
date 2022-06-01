@@ -6,6 +6,5 @@ class AnalogDialFace:
         1: { 'Name': 'Hours', 'Type': ClockHand},
         2: { 'Name': 'Minutes', 'Type': ClockHand},
         3: { 'Name': 'Seconds', 'Type': ClockHand},
-        4: { 'Name': 'CenterImage', 'Type': Image}, # verge
     }
 
