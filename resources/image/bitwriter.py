@@ -1,5 +1,4 @@
 import io
-import math
 
 
 class BitWriter():
@@ -8,7 +7,7 @@ class BitWriter():
         self._masks = [128, 192, 224, 240, 248, 252, 254, 255]
         self._stream = io.BytesIO(stream)
         self._currentBit = 0
-        self._currentByte = ''
+        self._currentByte = 0
 
     def WriteInt(self, value):
         self.WriteBits(value, 8)
@@ -24,7 +23,7 @@ class BitWriter():
     def WriteBits(self, data, length):
         while (length > 0):
             freeBits = 8 - self._currentBit
-            dataLength = math.Min(freeBits, length)
+            dataLength = min(freeBits, length)
 
             currentByteData = data >> (length - 8) if (length > 8) else data << (8 - length)
             appendData = (currentByteData & self._masks[dataLength - 1]) >> self._currentBit

@@ -27,7 +27,7 @@ class Writer:
         if (self._bitsPerPixel == 0):
             self._bitsPerPixel = 1
 
-        if (self._bitsPerPixel > 4):
+        if (self._bitsPerPixel > 8):
             raise Exception(
                 f"The image has {self._bitsPerPixel} bit/pixel and can't be packed for using on the watches. Looks like dithering works incorrectly on the image."
             )
@@ -42,45 +42,45 @@ class Writer:
 
     def ExtractPalette(self):
         logging.info("Extracting palette...");
-
+        pixels = self._image.convert('RGBA')
         for y in range(self._height):
             for x in range(self._width):
                 coordinate = (x, y)
-                color = self._image.getpixel(coordinate)
+                color = pixels.getpixel(coordinate)
                 print(color)
                 if (color in self._palleteColorsArray):
                     continue
 
-                if (color.a < 0x80 and self._transparency == 0):
-                    logging.info(f"Palette item {len(self._palleteColorsArray)}: R {hex(color.r)}, G {hex(color.g)}, B {hex(color.b)}, Transaparent color")
+                if (color[3] < 0x80 and self._transparency == 0):
+                    logging.info(f"Palette item {len(self._palleteColorsArray)}: R {hex(color[0])}, G {hex(color[1])}, B {hex(color[2])}, Transaparent color")
                     self._palleteColorsArray.insert(0, color)
                     self._transparency = 1
                 else:
-                    logging.info(f"Palette item {len(self._palleteColorsArray)}: R {hex(color.r)}, G {hex(color.g)}, B {hex(color.b)}")
+                    logging.info(f"Palette item {len(self._palleteColorsArray)}: R {hex(color[0])}, G {hex(color[1])}, B {hex(color[2])}")
                     self._palleteColorsArray.append(color)
 
-            startIndex = 1 if (self._transparency == 1) else 0
+        startIndex = 1 if (self._transparency == 1) else 0
 
-            for i in range(startIndex, len(self._palleteColorsArray) - 1):
-                minColor = self._palleteColorsArray[i].ToArgb()
-                minIndex = i;
-                for j in range(i + 1, len(self._palleteColorsArray)):
-                    color = self._palleteColorsArray[j].ToArgb()
-                    if (color >= minColor):
-                        continue
-
-                    minColor = color
-                    minIndex = j
-
-                if (minIndex == i):
+        for i in range(startIndex, len(self._palleteColorsArray) - 1):
+            minColor = self.toInt(self._palleteColorsArray[i])
+            minIndex = i
+            for j in range(i + 1, len(self._palleteColorsArray)):
+                color = self.toInt(self._palleteColorsArray[j])
+                if (color >= minColor):
                     continue
 
-                tmp = self._palleteColorsArray[i]
-                self._palleteColorsArray[i] = self._palleteColorsArray[minIndex]
-                self._palleteColorsArray[minIndex] = tmp
-            
-            self._paletteColors = len(self._palleteColorsArray)
-            self._bitsPerPixel = math.ceil(math.log(self._paletteColors, 2))
+                minColor = color
+                minIndex = j
+
+            if (minIndex == i):
+                continue
+
+            tmp = self._palleteColorsArray[i]
+            self._palleteColorsArray[i] = self._palleteColorsArray[minIndex]
+            self._palleteColorsArray[minIndex] = tmp
+        
+        self._paletteColors = len(self._palleteColorsArray)
+        self._bitsPerPixel = math.ceil(math.log(self._paletteColors, 2))
 
     def writeHeader(self):
         logging.debug("Writing image header...")
@@ -94,12 +94,12 @@ class Writer:
         self._writer.write(self._paletteColors.to_bytes(2, byteorder='little'))
         self._writer.write(self._transparency.to_bytes(1, byteorder='little'))
 
-    def writePalette(self):
+    def writePallete(self):
         logging.info("Writing palette...");
         for color in self._palleteColorsArray:
-            self._writer.write(color.r.to_bytes(1, byteorder='little'))
-            self._writer.write(color.g.to_bytes(1, byteorder='little'))
-            self._writer.write(color.b.to_bytes(1, byteorder='little'))
+            self._writer.write(color[0].to_bytes(1, byteorder='little'))
+            self._writer.write(color[1].to_bytes(1, byteorder='little'))
+            self._writer.write(color[2].to_bytes(1, byteorder='little'))
             self._writer.write((0).to_bytes(1, byteorder='little')) # always 0 maybe padding
             
     def writeImage(self):
@@ -114,12 +114,12 @@ class Writer:
         pixels = self._image.convert('RGBA')
 
         for y in range(self._height):
-            rowData = ''
+            rowData = b''
             bitWriter = BitWriter(rowData)
             for x in range(self._width):
                 coordinate = (x, y)
-                color = self._image.getpixel(coordinate)
-                if (color.a < 0x80 and self._transparency == 1):
+                color = pixels.getpixel(coordinate)
+                if (color[3] < 0x80 and self._transparency == 1):
                     bitWriter.WriteBits(0, self._bitsPerPixel)
                 else:
                     paletteIndex = paletteHash[color]
@@ -128,3 +128,6 @@ class Writer:
             bitWriter.Flush()
             self._writer.write(rowData)
             
+
+    def toInt(self, color):
+        return int('%02x%02x%02x%02x' % (color[3], color[0], color[1], color[2]), 24)
