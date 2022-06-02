@@ -1,0 +1,34 @@
+﻿import logging
+
+from watchFaceParser.models.elements.basic.compositeElement import CompositeElement
+
+
+class TemperatureNumberElement(CompositeElement):
+    def __init__(self, parameter, parent, name = None):
+        self._number = None
+        self._minusImageIndex = None
+        self._degreesImageIndex = None
+        super(TemperatureNumberElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
+
+
+    def draw4(self, drawer, resources, number):
+        assert(type(resources) == list)
+
+        if self._number:
+            self._number.draw4(drawer, resources, number)
+
+    def createChildForParameter(self, parameter):
+        from watchFaceParser.models.elements.basic.valueElement import ValueElement
+        parameterId = parameter.getId()
+        if parameterId == 1:
+            from watchFaceParser.models.elements.common.numberElement import NumberElement
+            self._month = NumberElement(parameter = parameter, parent = self, name = 'Number')
+            return self._month
+        elif parameterId == 2:
+            self._minusImageIndex = parameter.getValue() 
+            return ValueElement(parameter, self, 'MinusImageIndex')
+        elif parameterId == 3:
+            self._degreesImageIndex = parameter.getValue() 
+            return ValueElement(parameter, self, 'DegreesImageIndex')
+        else:
+            return super(TemperatureNumberElement, self).createChildForParameter(parameter)

@@ -75,7 +75,7 @@ class ParametersConverter:
                     value = int(value)
 
                 logging.debug(f"{currentPath} '{propertyInfo['Name']}': {value}")
-                result.append(Parameter(_id, value))
+                result.append(Parameter(_id, value, None, propertyType))
             elif propertyType == ParameterFlags:
                 flags = ParameterFlags.fromJSON(propertyValue)
                 logging.debug(f"{currentPath} '{propertyInfo['Name']}': {flags}")
