@@ -26,7 +26,8 @@ class DistanceElement(CompositeElement):
         decimals = int(state.getDistance() % 1000 / 10)
 
         images = self.getNumber().getImagesForNumber(resources, kilometers)
-        images.append(resources[self.getDecimalPointImageIndex()])
+        if self.getDecimalPointImageIndex():
+            images.append(resources[self.getDecimalPointImageIndex()])
         for image in self.getNumber().getImagesForNumber(resources, decimals):
             images.append(image)
         if self.getSuffixImageIndex():

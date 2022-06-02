@@ -55,45 +55,45 @@ class NumberElement(CoordinatesElement):
 
 
     def getBottomRightX(self):
-        return self._bottomRightX
+        return self._bottomRightX or 0
 
 
     def getBottomRightY(self):
-        return self._bottomRightY
+        return self._bottomRightY or 0
 
 
     def getAlignment(self):
-        return self._alignment
+        return self._alignment or 0
 
 
     def getSpacing(self):
-        return self._spacing
+        return self._spacing or 0
 
 
     def getImageIndex(self):
-        return self._imageIndex
+        return self._imageIndex or 0
 
 
     def getImagesCount(self):
-        return self._imagesCount
+        return self._imagesCount or 1
 
 
     def getBox(self):
-        return Box(self._x, self._y, self._bottomRightX - self._x, self._bottomRightY - self._y)
+        return Box(self.getX(), self.getY(), self.getBottomRightX() - self.getX(), self.getBottomRightY() - self.getY())
 
 
     def getAltBox(self, altCoordinates):
-        return Box(altCoordinates._x, altCoordinates._y, self._bottomRightX - self._x, self._bottomRightY - self._y)
+        return Box(altCoordinates.getX(), altCoordinates.getY(), self.getBottomRightX() - self.getX(), self.getBottomRightY() - self.getY())
 
 
     def draw4(self, drawer, images, number, minimumDights = 1):
         from watchFaceParser.helpers.drawerHelper import DrawerHelper
-        DrawerHelper.drawImages(drawer, self.getImagesForNumber(images, number, minimumDights), self._spacing, self._alignment, self.getBox())
+        DrawerHelper.drawImages(drawer, self.getImagesForNumber(images, number, minimumDights), self.getSpacing(), self.getAlignment(), self.getBox())
 
 
     def getImagesForNumber(self, images, number, minimumDigits = 1):
         stringNumber = str(number).zfill(minimumDigits)
-        return [images[self._imageIndex + int(digit)] for digit in stringNumber if int(digit) < self._imagesCount]
+        return [images[self.getImageIndex() + int(digit)] for digit in stringNumber if int(digit) < self.getImagesCount()]
 
 
     def createChildForParameter(self, parameter):
@@ -101,19 +101,19 @@ class NumberElement(CoordinatesElement):
 
         parameterId = parameter.getId()
         if parameterId == 3:
-            self._bottomRightX = parameter.getValue()
+            self._bottomRightX = parameter.getValue() 
             return ValueElement(parameter, self, 'BottomRightX')
         elif parameterId == 4:
-            self._bottomRightY = parameter.getValue()
+            self._bottomRightY = parameter.getValue() 
             return ValueElement(parameter, self, 'BottomRightY')
         elif parameterId == 5:
-            self._alignment = parameter.getValue()
+            self._alignment = parameter.getValue() 
             return ValueElement(parameter, self, 'Alignment')
         elif parameterId == 6:
-            self._spacing = parameter.getValue()
+            self._spacing = parameter.getValue() 
             return ValueElement(parameter, self, 'Spacing')
         elif parameterId == 7:
-            self._imageIndex = parameter.getValue()
+            self._imageIndex = parameter.getValue() 
             return ValueElement(parameter, self, 'ImageIndex')
         elif parameterId == 8:
             self._imagesCount = parameter.getValue()

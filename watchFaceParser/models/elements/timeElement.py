@@ -45,6 +45,7 @@ class TimeElement(ContainerElement):
 
     def draw3(self, drawer, images, state):
         assert(type(images) == list)
+        print('time', state.getTime(), self.getHours().getTens())
 
         if self.getAmPm():
             self.getAmPm().draw3(drawer, images, state)
@@ -52,10 +53,11 @@ class TimeElement(ContainerElement):
         hours = state.getTime().hour if self.getAmPm() is None else state.getTime().hour % 12
         # drawingOrder = 0x1234 if self.getDrawingOrder() is None else self.getDrawingOrder()
 
-        if self.getHours() and self.getHours().getTens():
+        if self.getHours():
             self.getHours().getTens().draw3(drawer, images, int(hours % 100 / 10))
         if self.getHours() and self.getHours().getOnes():
             self.getHours().getOnes().draw3(drawer, images, hours % 10)
+
         if self.getMinutes() and self.getMinutes().getTens():
             self.getMinutes().getTens().draw3(drawer, images, int(state.getTime().minute % 100 / 10))
         if self.getMinutes() and self.getMinutes().getOnes():

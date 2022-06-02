@@ -197,9 +197,11 @@ class Parser:
                 append_images=images[1:],
                 duration=1000,
                 loop=0)
-        except Exception:
-            
-            return
+        except Exception as e:
+            import traceback
+            #traceback.print_stack()
+            logging.exception(e)
+            return None
 
 
     @staticmethod

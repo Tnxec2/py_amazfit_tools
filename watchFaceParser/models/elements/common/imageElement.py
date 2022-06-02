@@ -11,7 +11,7 @@ class ImageElement(CoordinatesElement):
 
 
     def getImageIndex(self):
-        return self._imageIndex
+        return self._imageIndex or 0
 
 
     def setImageIndex(self, imageIndex):
@@ -23,13 +23,13 @@ class ImageElement(CoordinatesElement):
 
 
     def draw2(self, drawer, images, angle):
-        x = self._x
-        y = self._y
+        x = self.getX()
+        y = self.getY()
         if angle is None:
-            temp = images[self._imageIndex].getBitmap()
+            temp = images[self.getImageIndex()].getBitmap()
             drawer.paste(temp, (x,y), temp)
         else:
-            bitmap = images[self._imageIndex].getBitmap()
+            bitmap = images[self.getImageIndex()].getBitmap()
             from PIL import Image
             # temp = Image.new('RGBA', (360, 360))
             # temp.paste(bitmap, (180 - x, 180 - y), bitmap)

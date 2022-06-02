@@ -9,7 +9,7 @@ class ImageSetElement(ImageElement):
 
 
     def getImagesCount(self):
-        return self._imagesCount
+        return self._imagesCount or 1
 
 
     def draw3(self, drawer, resources, index):
