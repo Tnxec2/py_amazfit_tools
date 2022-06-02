@@ -1,5 +1,6 @@
 import logging
 import os.path
+from watchFaceParser.models.drawingOrder import DrawingOrder
 
 from watchFaceParser.utils.elementsHelper import ElementsHelper
 from watchFaceParser.models.textAlignment import TextAlignment
@@ -20,7 +21,7 @@ def uint2int(n):
     return n
 
 def toSigned32(n):
-    if n:
+    if type(n) == int:
         n = n & 0xffffffff
         return (n ^ 0x80000000) - 0x80000000
     return n
@@ -53,7 +54,7 @@ class ParametersConverter:
             if propertyValue is None:
                 continue
 
-            if propertyType == 'long' or propertyType == 'long?' or propertyType == TextAlignment  or propertyType == Color or propertyType == 'bool':
+            if propertyType == 'long' or propertyType == 'long?' or propertyType == TextAlignment  or propertyType == Color or propertyType == DrawingOrder or propertyType == 'bool':
                 value = propertyValue
                 if propertyType == 'bool' or type(propertyValue) == bool:
                     value = 1 if propertyValue else 0
@@ -61,6 +62,8 @@ class ParametersConverter:
                     value = TextAlignment.fromJSON(propertyValue)
                 elif propertyType == Color:
                     value = Color.fromJSON(propertyValue)
+                elif propertyType == DrawingOrder:
+                    value = DrawingOrder.fromJSON(propertyValue)
                 elif propertyType == 'long' or propertyType == 'long?':
                     value = int(value)
 
@@ -87,7 +90,7 @@ class ParametersConverter:
 
         for parameter in descriptor:
             parameterId = parameter.getId()
-            currentPath = str(parameterId) if not path else os.path.join(path, '.', str(parameterId))
+            currentPath = str(parameterId) if not path else os.path.join(path, str(parameterId))
 
             if parameterId not in properties:
                 logging.warn(f"[ParamConv:parse] currentPath {currentPath} / Parameter {parameterId} isn't supported for {currentType}")
@@ -104,16 +107,18 @@ class ParametersConverter:
             string = (f"{currentPath}-{propertyInfoName}")
             logging.debug(string.replace("\\",""))
 
-            if propertyType == 'long' or propertyType == 'long?' or propertyType == TextAlignment  or propertyType == Color or propertyType == 'bool':
+            if propertyType == 'long' or propertyType == 'long?' or propertyType == TextAlignment  or propertyType == Color or propertyType == DrawingOrder or propertyType == 'bool':
                 if propertyType == TextAlignment:
                     setattr(result, propertyInfoName, TextAlignment(parameter.getValue()))
                 elif propertyType == Color:
                     setattr(result, propertyInfoName, Color(parameter.getValue()))
+                elif propertyType == DrawingOrder:
+                    setattr(result, propertyInfoName, DrawingOrder(parameter.getValue()))
                 elif propertyType == 'bool':
                     setattr(result, propertyInfoName, parameter.getValue() > 0)
                 elif propertyType == 'long':
-                    setattr(result, propertyInfoName, toSigned32(parameter.getValue() or None)) 
-                else:
+                    setattr(result, propertyInfoName, toSigned32(parameter.getValue())) 
+                elif propertyType == 'long?':
                     setattr(result, propertyInfoName, ulong2long(parameter.getValue() or None))
 
             elif propertyType == '[]':
