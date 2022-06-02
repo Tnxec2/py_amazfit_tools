@@ -13,8 +13,10 @@ class SeparateTemperatureElement(ContainerElement):
 
 
     def draw3(self, drawer, images, state):
-        # TODO: draw separate temperatures
-        return
+        if self._day:
+            self._day.draw4(drawer, images, state.getCurrentTemperature()+7)
+        if self._night:
+            self._night.draw4(drawer, images, state.getCurrentTemperature()-7)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()

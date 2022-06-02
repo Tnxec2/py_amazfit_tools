@@ -9,6 +9,11 @@ class TpodayElement(ContainerElement):
         self._oneline = None
         super(TpodayElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
+    def draw3(self, drawer, images, state):
+        if self._separate_temperature:
+            self._separate_temperature.draw3(drawer, images, state)
+        if self._oneline:
+            self._oneline.draw3(drawer, images, state)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()

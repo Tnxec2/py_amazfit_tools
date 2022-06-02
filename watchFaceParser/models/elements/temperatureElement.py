@@ -9,6 +9,11 @@ class TemperatureElement(ContainerElement):
         self._today = None
         super(TemperatureElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
+    def draw3(self, drawer, images, state):
+        if self._current:
+            self._current.draw3(drawer, images, state.getCurrentTemperature())
+        if self._today:
+            self._today.draw3(drawer, images, state)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()

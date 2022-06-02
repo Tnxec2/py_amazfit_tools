@@ -1,7 +1,5 @@
-﻿import logging
-
+﻿
 from watchFaceParser.models.elements.basic.containerElement import ContainerElement
-
 
 class WeatherIconElement(ContainerElement):
     def __init__(self, parameter, parent = None, name = None):
@@ -10,7 +8,7 @@ class WeatherIconElement(ContainerElement):
 
     def draw3(self, drawer, images, state):
         if self._customicon:
-            self._customicon.draw3(drawer, images, state.get)
+            self._customicon.draw3(drawer, images, state.getCurrentWeather() or 0)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
@@ -19,6 +17,6 @@ class WeatherIconElement(ContainerElement):
         elif parameterId == 2:
             from watchFaceParser.models.elements.common.imageSetElement import ImageSetElement
             self._customicon = ImageSetElement(parameter = parameter, parent = self, name = 'CustomIcon')
-            return self._weekDay
+            return self._customicon
         else:
             return super(WeatherIconElement, self).createChildForParameter(parameter)

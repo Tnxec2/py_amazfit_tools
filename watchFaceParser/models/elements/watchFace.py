@@ -14,41 +14,6 @@ class WatchFace(ContainerElement):
         self._analogDial = None
         super(WatchFace, self).__init__(parameters, parameter = None, parent = None, name = '')
 
-
-    def getBackground(self):
-        return self._background
-
-
-    def getTime(self):
-        return self._time
-
-
-    def getActivity(self):
-        return self._activity
-
-
-    def getDate(self):
-        return self._date
-
-    def getWeather(self):
-        return self._weather
-
-    def getStepsProgress(self):
-        return self._stepsProgress
-
-
-    def getStatus(self):
-        return self._status
-
-
-    def getBattery(self):
-        return self._battery
-
-
-    def getAnalogDial(self):
-        return self._analogDial
-
-
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
         if parameterId == 2:

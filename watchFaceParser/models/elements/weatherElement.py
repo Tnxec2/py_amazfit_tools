@@ -9,7 +9,6 @@ class WeatherElement(ContainerElement):
         self._temperature = None
         super(WeatherElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
-
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
         if parameterId == 1:

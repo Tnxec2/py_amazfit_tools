@@ -1,6 +1,8 @@
 import os.path
 import logging
 import json
+import random
+from watchFaceParser.models.weatherCondition import WeatherCondition
 
 
 from watchFaceParser.reader import Reader
@@ -242,6 +244,8 @@ class Parser:
                 Unlocked = num > 2 and num < 7,
                 Alarm = num > 3 and num < 8,
                 DoNotDisturb = num > 4 and num < 9,
+                CurrentTemperature = num * 2,
+                CurrentWeather = random.randint(0, 25)
             )
 
             watchState.setTime(datetime.datetime(year = time.year, month = num, day = num * 2 + 5, hour = i * 2, minute = i * 6, second = i))
