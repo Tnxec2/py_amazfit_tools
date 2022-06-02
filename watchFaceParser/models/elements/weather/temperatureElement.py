@@ -18,12 +18,12 @@ class TemperatureElement(ContainerElement):
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
         if parameterId == 1:
-            from watchFaceParser.models.elements.temperatureNumberElement import TemperatureNumberElement
+            from watchFaceParser.models.elements.weather.temperatureNumberElement import TemperatureNumberElement
             self._current = TemperatureNumberElement(parameter = parameter, parent = self, name = 'Current')
             return self._current
         elif parameterId == 2:
-            from watchFaceParser.models.elements.todayElement import TpodayElement
-            self._today = TpodayElement(parameter = parameter, parent = self, name = 'Today')
+            from watchFaceParser.models.elements.weather.todayElement import TodayElement
+            self._today = TodayElement(parameter = parameter, parent = self, name = 'Today')
             return self._today
         else:
             return super(TemperatureElement, self).createChildForParameter(parameter)

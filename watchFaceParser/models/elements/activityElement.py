@@ -42,37 +42,31 @@ class ActivityElement(ContainerElement):
     def getCircleRange(self):
         return self._circleRange
 
+    def draw3(self, drawer, images, state):
+        return super().draw3(drawer, images, state)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
         if parameterId == 1:
-            from watchFaceParser.models.elements.activity.stepsGoalElement import StepsGoalElement
-            self._stepsGoal = StepsGoalElement(parameter = parameter, parent = self, name = '?StepsGoal?')
-            return self._stepsGoal
-        elif parameterId == 2:
-            from watchFaceParser.models.elements.activity.caloriesElement import CaloriesElement
-            self._calories = CaloriesElement(parameter = parameter, parent = self, name = '?Calories?')
-            return self._calories
-        elif parameterId == 3:
-            from watchFaceParser.models.elements.activity.pulseElement import PulseElement
-            self._pulse = PulseElement(parameter = parameter, parent = self, name = '?Pulse?')
-            return self._pulse
-        elif parameterId == 4:
-            from watchFaceParser.models.elements.activity.distanceElement import DistanceElement
-            self._distance = DistanceElement(parameter = parameter, parent = self, name = '?DistanceElement?')
-            return self._distance
-        elif parameterId == 5:
             from watchFaceParser.models.elements.activity.stepsElement import StepsElement
             self._steps = StepsElement(parameter = parameter, parent = self, name = '?Steps?')
             return self._steps
-        elif parameterId == 7:
-            from watchFaceParser.models.elements.activity.starImageElement import StarImageElement
-            self._starImage = StarImageElement(parameter = parameter, parent = self, name = '?StarImage?')
-            return self._starImage
-        elif parameterId == 9:
-            from watchFaceParser.models.elements.common.imageElement import ImageElement
-            self._circleRange = ImageElement(parameter = parameter, parent = self, name = '?CircleRange?')
-            return self._circleRange
+        elif parameterId == 2:
+            from watchFaceParser.models.elements.activity.stepsGoalElement import StepsGoalElement
+            self._stepsGoal = StepsGoalElement(parameter = parameter, parent = self, name = '?StepsGoal?')
+            return self._stepsGoal
+        elif parameterId == 3:
+            from watchFaceParser.models.elements.activity.caloriesElement import CaloriesElement
+            self._calories = CaloriesElement(parameter = parameter, parent = self, name = '?Calories?')
+            return self._calories
+        elif parameterId == 4:
+            from watchFaceParser.models.elements.activity.pulseElement import PulseElement
+            self._pulse = PulseElement(parameter = parameter, parent = self, name = '?Pulse?')
+            return self._pulse
+        elif parameterId == 5:
+            from watchFaceParser.models.elements.activity.distanceElement import DistanceElement
+            self._distance = DistanceElement(parameter = parameter, parent = self, name = '?DistanceElement?')
+            return self._distance
         else:
             return super(ActivityElement, self).createChildForParameter(parameter)
 

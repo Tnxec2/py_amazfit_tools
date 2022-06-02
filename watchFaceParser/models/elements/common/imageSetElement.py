@@ -19,7 +19,8 @@ class ImageSetElement(ImageElement):
             index = int(self.getImagesCount()) - 1
         imageIndex = int(self.getImageIndex() + index)
         temp = resources[imageIndex].getBitmap()
-        drawer.paste(temp, (self._x, self._y), temp)
+
+        drawer.paste(temp, (self.getX(), self.getY()), temp)
 
 
     def createChildForParameter(self, parameter):

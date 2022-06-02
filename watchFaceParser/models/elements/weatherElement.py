@@ -12,11 +12,11 @@ class WeatherElement(ContainerElement):
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
         if parameterId == 1:
-            from watchFaceParser.models.elements.weatherIconElement import WeatherIconElement
+            from watchFaceParser.models.elements.weather.weatherIconElement import WeatherIconElement
             self._icon = WeatherIconElement(parameter = parameter, parent = self, name = 'Icon')
             return self._icon
         elif parameterId == 2:
-            from watchFaceParser.models.elements.temperatureElement import TemperatureElement
+            from watchFaceParser.models.elements.weather.temperatureElement import TemperatureElement
             self._temperature = TemperatureElement(parameter = parameter, parent = self, name = 'Temperature')
             return self._temperature
         else:

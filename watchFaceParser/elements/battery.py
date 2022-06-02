@@ -1,7 +1,7 @@
 from watchFaceParser.elements.batteryNumber import BatteryNumber
 from watchFaceParser.elements.basicElements.image import Image
 from watchFaceParser.elements.basicElements.imageSet import ImageSet
-from watchFaceParser.elements.basicElements.imageScale import IconSet
+from watchFaceParser.elements.basicElements.iconSet import IconSet
 
 
 class Battery:

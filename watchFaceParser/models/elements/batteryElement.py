@@ -12,22 +12,6 @@ class BatteryElement(ContainerElement):
         super(BatteryElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
 
-    def getText(self):
-        return self._text
-
-
-    def getPercent(self):
-        return self._percent
-
-
-    def getScale(self):
-        return self._scale
-
-
-    def getImages(self):
-        return self._images
-
-
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
         from watchFaceParser.models.elements.basic.valueElement import ValueElement

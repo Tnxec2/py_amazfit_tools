@@ -1,10 +1,24 @@
-﻿from watchFaceParser.models.elements.common.numberElement import NumberElement
+﻿from watchFaceParser.models.elements.basic.compositeElement import CompositeElement
 
-class StepsGoalElement(NumberElement):
-    def __init__(self, parameter, parent, name = 'None'):
-        super(StepsGoalElement, self).__init__(parameter, parent, name)
+
+class StepsGoalElement(CompositeElement):
+    def __init__(self, parameter, parent, name = None):
+        self._number = None
+        super(StepsGoalElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
     def draw3(self, drawer, resources, state):
-        assert(type(resources) == list)
-        if state.getGoal():
-            self.draw4(drawer, resources, state.getGoal())
+        images = self._number.getImagesForNumber(resources, state.getGoal())
+
+        from watchFaceParser.helpers.drawerHelper import DrawerHelper
+        DrawerHelper.drawImages(drawer, images, self._number.getSpacing(), self._number.getAlignment(), self._number.getBox())
+
+    def createChildForParameter(self, parameter):
+        parameterId = parameter.getId()
+
+        if parameterId == 1:
+            from watchFaceParser.models.elements.common.numberElement import NumberElement
+            self._number = NumberElement(parameter, self, 'Number')
+            return self._number
+        else:
+            super(StepsGoalElement, self).createChildForParameter(parameter)
+

@@ -4,52 +4,40 @@ from watchFaceParser.models.elements.basic.containerElement import ContainerElem
 
 class StepsProgressElement(ContainerElement):
     def __init__(self, parameter, parent = None, name = None):
-        self._circular = None
-        self._images1 = None
-        self._images2 = None
-        self._images4 = None
+        self._goalimage = None
+        self._linear = None
+        self._gauge = None
+        self._circle = None
         super(StepsProgressElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
-
-    def getCircular(self):
-        return self._circular
-
-
-    def getImages1(self):
-        return self._images1
-
-    def getImages2(self):
-        return self._images2
-
-    def getImages4(self):
-        return self._images4
-
-
-    # def getCircular2(self):
-    #     return self._circular2
-
+    def draw3(self, drawer, images, state):
+        if self._goalimage:
+            if state.getSteps() >= state.getGoal():
+                self._goalimage.draw3(drawer, images, state)
+        if self._linear:
+            self._linear.draw3(drawer, images, state)
+        if self._gauge:
+            self._gauge.draw3(drawer, images, state)
+        if self._circle:
+            self._circle.draw3(drawer, images, state)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
-        if parameterId == 3:
-            from watchFaceParser.models.elements.goalProgress.circularGoalProgressElement import CircularGoalProgressElement
-            self._circular = CircularGoalProgressElement(parameter = parameter, parent = self, name = 'Circular')
-            return self._circular
-        elif parameterId == 1:
-            from watchFaceParser.models.elements.goalProgress.stepGaugeElement import StepGaugeElement # temp.
-            self._images1 = StepGaugeElement(parameter = parameter, parent = self, name = '?_images?')
-            return self._images1
+        if parameterId == 1:
+            from watchFaceParser.models.elements.common.imageElement import ImageElement
+            self._goalimage = ImageElement(parameter = parameter, parent = self, name = 'GoalImage')
+            return self._goalimage
         elif parameterId == 2:
-            from watchFaceParser.models.elements.goalProgress.stepGaugeElement import StepGaugeElement # temp.
-            self._images2 = StepGaugeElement(parameter = parameter, parent = self, name = '?_images?')
-            return self._images2
+            from watchFaceParser.models.elements.goalProgress.linearGoalProgressElement import LinearGoalProgressElement
+            self._linear = LinearGoalProgressElement(parameter = parameter, parent = self, name = 'Linear')
+            return self._linear
+        elif parameterId == 3:
+            from watchFaceParser.models.elements.goalProgress.stepGaugeElement import StepGaugeElement
+            self._gauge = StepGaugeElement(parameter = parameter, parent = self, name = 'Gauge')
+            return self._gauge
         elif parameterId == 4:
-            from watchFaceParser.models.elements.goalProgress.stepGaugeElement import StepGaugeElement # temp.
-            self._images4 = StepGaugeElement(parameter = parameter, parent = self, name = '?_images?')
-            return self._images4
-        # elif parameterId == 5:
-        #     from watchFaceParser.models.elements.goalProgress.circularGoalProgressElement import CircularGoalProgressElement
-        #     self._circular2 = CircularGoalProgressElement(parameter = parameter, parent = self, name = 'Circular2')
-        #     return self._circular2
+            from watchFaceParser.models.elements.goalProgress.circularGoalProgressElement import CircularGoalProgressElement # temp.
+            self._circle = CircularGoalProgressElement(parameter = parameter, parent = self, name = 'Circle')
+            return self._circle
         else:
             return super(StepsProgressElement, self).createChildForParameter(parameter)

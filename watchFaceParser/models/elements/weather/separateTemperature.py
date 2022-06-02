@@ -14,18 +14,18 @@ class SeparateTemperatureElement(ContainerElement):
 
     def draw3(self, drawer, images, state):
         if self._day:
-            self._day.draw4(drawer, images, state.getCurrentTemperature()+7)
+            self._day.draw3(drawer, images, state.getCurrentTemperature()+7)
         if self._night:
-            self._night.draw4(drawer, images, state.getCurrentTemperature()-7)
+            self._night.draw3(drawer, images, state.getCurrentTemperature()-7)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
         if parameterId == 1:
-            from watchFaceParser.models.elements.temperatureNumberElement import TemperatureNumberElement
+            from watchFaceParser.models.elements.weather.temperatureNumberElement import TemperatureNumberElement
             self._day = TemperatureNumberElement(parameter = parameter, parent = self, name = 'Day')
             return self._day
         elif parameterId == 2:
-            from watchFaceParser.models.elements.temperatureNumberElement import TemperatureNumberElement
+            from watchFaceParser.models.elements.weather.temperatureNumberElement import TemperatureNumberElement
             self._night = TemperatureNumberElement(parameter = parameter, parent = self, name = 'Night')
             return self._night
         elif parameterId == 3:
