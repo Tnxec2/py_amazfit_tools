@@ -1,4 +1,4 @@
-from watchFaceParser.elements.shortcutElements import Shortcut
+from watchFaceParser.elements.shortcutElements.shortcut import Shortcut
 
 class Shortcuts:
     definitions = {
