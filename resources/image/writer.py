@@ -2,6 +2,8 @@ import imp
 from io import BytesIO
 import logging
 import math
+
+
 from resources.image.bitwriter import BitWriter
 from resources.image.color import Color
 
@@ -17,8 +19,19 @@ class Writer:
         self._transparency = 0
 
     def write(self, image):
-        from PIL import Image
-        self._image = image.quantize(colors=64, dither=Image.FLOYDSTEINBERG).convert('RGBA')
+        
+        from watchFaceParser.config import Config
+        if Config.isDither:
+            from PIL import Image, features
+            if features.check_feature(feature="libimagequant"):
+                logging.debug("Dither image with libimagequant method")
+                self._image = image.quantize(colors=64, method=Image.LIBIMAGEQUANT, dither=Image.FLOYDSTEINBERG).convert('RGBA')
+            else:
+                logging.debug("Dither image with default method")
+                self._image = image.quantize(colors=64, dither=Image.FLOYDSTEINBERG).convert('RGBA')
+        else: 
+            self._image = image.convert('RGBA')
+
         self._width = image.size[0]
         self._height = image.size[1]
 
