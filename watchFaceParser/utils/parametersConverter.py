@@ -3,6 +3,7 @@ import os.path
 from watchFaceParser.models.drawingOrder import DrawingOrder
 
 from watchFaceParser.utils.elementsHelper import ElementsHelper
+from watchFaceParser.models.parameterFlags import ParameterFlags
 from watchFaceParser.models.textAlignment import TextAlignment
 from watchFaceParser.models.color import Color
 from watchFaceParser.models.parameter import Parameter
@@ -53,9 +54,15 @@ class ParametersConverter:
 
             if propertyValue is None:
                 continue
-
-            if propertyType == 'long' or propertyType == 'long?' or propertyType == TextAlignment  or propertyType == Color or propertyType == DrawingOrder or propertyType == 'bool':
+            if ( propertyType == 'long' or 
+                 propertyType == 'long?' or 
+                 propertyType == TextAlignment or 
+                 propertyType == Color or 
+                 propertyType == DrawingOrder or 
+                 propertyType == 'bool'
+                ):
                 value = propertyValue
+                flags = None
                 if propertyType == 'bool' or type(propertyValue) == bool:
                     value = 1 if propertyValue else 0
                 elif propertyType == TextAlignment:
@@ -69,13 +76,31 @@ class ParametersConverter:
 
                 logging.debug(f"{currentPath} '{propertyInfo['Name']}': {value}")
                 result.append(Parameter(_id, value))
+            elif propertyType == ParameterFlags:
+                flags = ParameterFlags.fromJSON(propertyValue)
+                logging.debug(f"{currentPath} '{propertyInfo['Name']}': {flags}")
+                result.append(Parameter(_id, None, flags = flags))
+
             else:
+                if isinstance(propertyValue,list):
+                    for i in propertyValue:
+                        innerParameters = ParametersConverter.build(propertyType, i, currentPath)
+                        if len(innerParameters) > 0:
+                            logging.debug(f"{currentPath} '{propertyInfo['Name']}'")
+                            result.append(Parameter(_id, innerParameters))
+                        else: 
+                            logging.debug(f"{currentPath} '{propertyInfo['Name']}': empty1")
+                            result.append(Parameter(_id, []))
+                    continue
                 innerParameters = ParametersConverter.build(propertyType, propertyValue, currentPath)
+
                 if len(innerParameters) > 0:
                     logging.debug(f"{currentPath} '{propertyInfo['Name']}'")
                     result.append(Parameter(_id, innerParameters))
                 else:
-                    logging.debug(f"{currentPath} '{propertyInfo['Name']}': Skipped because of empty")
+                    logging.debug(f"{currentPath} '{propertyInfo['Name']}': empty2")
+                    result.append(Parameter(_id, []))
+
 
         return result
 
