@@ -1,4 +1,5 @@
 from watchFaceParser.elements.background import Background
+from watchFaceParser.elements.shortcutElements.shortcuts import Shortcuts
 from watchFaceParser.elements.time import Time
 from watchFaceParser.elements.activity import Activity
 from watchFaceParser.elements.date import Date
@@ -21,4 +22,5 @@ class WatchFace:
         8: { 'Name': 'Status', 'Type': Status},
         9: { 'Name': 'Battery', 'Type': Battery},
         10: { 'Name': 'AnalogDialFace', 'Type': AnalogDialFace},
+        16: { 'Name': 'Shortcuts', 'Type': Shortcuts}, 
     }
