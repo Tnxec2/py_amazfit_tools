@@ -244,7 +244,7 @@ class Parser:
                 Unlocked = num > 2 and num < 7,
                 Alarm = num > 3 and num < 8,
                 DoNotDisturb = num > 4 and num < 9,
-                CurrentTemperature = num * 2,
+                CurrentTemperature = -22 + i * 6,
                 CurrentWeather = random.randint(0, 25)
             )
 
