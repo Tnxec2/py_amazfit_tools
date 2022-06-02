@@ -1,6 +1,6 @@
 class Config:
-    _image_size = 178
-    _preview_size = 178
+    _image_size = 176
+    _preview_size = 110
     _dither = False
 
     @staticmethod

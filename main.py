@@ -12,7 +12,7 @@ if __name__ == '__main__':
     watchface.json - packs config and referenced images to bin file''')
     args = parser.parse_args()
 
-    Config.setDither(args.dither)
+    Config.setDither(args.dither64)
 
     for inputFileName in args.filename:
         isDirectory = os.path.isdir(inputFileName)

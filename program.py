@@ -172,30 +172,34 @@ class Parser:
 
         logging.debug("Generating previews...")
 
-        states = Parser.getPreviewStates(outputDirectory)
-        logging.debug("Generating states done...")
-        #staticPreview = PreviewGenerator.createImage(parameters, images, WatchState())
-        logging.debug("Generating static preview gen done...")
-        #staticPreview.save(os.path.join(outputDirectory, f"{baseName}_static.png"))
+        try:
+            states = Parser.getPreviewStates(outputDirectory)
+            logging.debug("Generating states done...")
+            staticPreview = PreviewGenerator.createImage(parameters, images, WatchState())
+            logging.debug("Generating static preview gen done...")
+            staticPreview.save(os.path.join(outputDirectory, f"{baseName}_static.png"))
 
-        # generate small preview image for Preview section.
-        from PIL import Image
-        new_w, new_h = Config.getPreviewSize(), Config.getPreviewSize()
-        #im_resized = staticPreview.resize((new_w, new_h), resample = Image.LANCZOS)
-        #im_resized.save(os.path.join(outputDirectory, f"{baseName}_static_{Config.getPreviewSize()}.png"))
-        logging.debug("Generating static preview save done...")
+            # generate small preview image for Preview section.
+            from PIL import Image
+            new_w, new_h = Config.getPreviewSize(), Config.getPreviewSize()
+            im_resized = staticPreview.resize((new_w, new_h), resample = Image.LANCZOS)
+            im_resized.save(os.path.join(outputDirectory, f"{baseName}_static_{Config.getPreviewSize()}.png"))
+            logging.debug("Generating static preview save done...")
 
-        #previewImages = PreviewGenerator.createAnimation(parameters, images, states)
-        logging.debug("Generating anim preview gen done...")
+            previewImages = PreviewGenerator.createAnimation(parameters, images, states)
+            logging.debug("Generating anim preview gen done...")
 
-        images = []
-        #for previewImage in previewImages:
-        #    images.append(previewImage)
-        #images[0].save(os.path.join(outputDirectory, f"{baseName}_animated.gif"),
-        #    save_all=True,
-        #    append_images=images[1:],
-        #    duration=1000,
-        #    loop=0)
+            images = []
+            for previewImage in previewImages:
+                images.append(previewImage)
+            images[0].save(os.path.join(outputDirectory, f"{baseName}_animated.gif"),
+                save_all=True,
+                append_images=images[1:],
+                duration=1000,
+                loop=0)
+        except Exception:
+            
+            return
 
 
     @staticmethod
