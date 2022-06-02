@@ -1,8 +1,8 @@
+import imp
 from io import BytesIO
 import logging
 import math
 from resources.image.bitwriter import BitWriter
-
 from resources.image.color import Color
 
 
@@ -17,7 +17,8 @@ class Writer:
         self._transparency = 0
 
     def write(self, image):
-        self._image = image
+        from PIL import Image
+        self._image = image.quantize(colors=64, dither=Image.FLOYDSTEINBERG).convert('RGBA')
         self._width = image.size[0]
         self._height = image.size[1]
 
@@ -43,12 +44,11 @@ class Writer:
 
     def ExtractPalette(self):
         logging.debug("Extracting palette...");
-        pixels = self._image.convert('RGBA')
         self._palleteColorsArray = []
         for y in range(self._height):
             for x in range(self._width):
                 coordinate = (x, y)
-                pixel_color = pixels.getpixel(coordinate)
+                pixel_color = self._image.getpixel(coordinate)
                 if pixel_color in self._palleteColorsArray:
                     continue
                 (r, g, b, a) = pixel_color
@@ -115,13 +115,11 @@ class Writer:
         for color in self._palleteColorsArray:
             paletteHash[color] = i
             i += 1
-        pixels = self._image.convert('RGBA')
-
         for y in range(self._height):
             bitWriter = BitWriter(self._writer)
             for x in range(self._width):
                 coordinate = (x, y)
-                color = pixels.getpixel(coordinate)
+                color = self._image.getpixel(coordinate)
                 (r, g, b, a) = color
                 if (a < 128 and self._transparency == 1):
                     bitWriter.WriteBits(0, self._bitsPerPixel)
