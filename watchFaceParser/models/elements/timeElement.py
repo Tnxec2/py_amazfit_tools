@@ -45,8 +45,6 @@ class TimeElement(ContainerElement):
 
     def draw3(self, drawer, images, state):
         assert(type(images) == list)
-        print('time', state.getTime(), self.getHours().getTens())
-
         if self.getAmPm():
             self.getAmPm().draw3(drawer, images, state)
 

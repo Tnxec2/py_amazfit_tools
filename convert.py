@@ -2,13 +2,11 @@ import os
 import logging
 
 class Converter:
-    width_gtr = 454
-    width_verge_lite = 360
     width_bip = 176
 
     def __init__(self):
         self.source_size = 0
-        self.target_size = Converter.width_verge_lite
+        self.target_size = Converter.width_bip
 
     def loadJson(self, json_path):
         try:
@@ -65,11 +63,7 @@ class Converter:
         im = Image.open(target_path)
         (w, h) = im.size
         if w == h:
-            if w == Converter.width_gtr:
-                self.source_size = Converter.width_gtr
-                print('GTR source')
-                return
-            elif w == Converter.width_bip:
+            if w == Converter.width_bip:
                 self.source_size = Converter.width_bip
                 print('BIP source')
                 return
