@@ -31,7 +31,7 @@ class IconSetElement(CompositeElement):
             self._startImageIndex = parameter.getValue()
             from watchFaceParser.models.elements.basic.valueElement import ValueElement
             return ValueElement(parameter, self, 'StartImageIndex')
-        if parameter.getId() == 2:
+        elif parameter.getId() == 2:
             from watchFaceParser.models.elements.common.coordinatesElement import CoordinatesElement
             self._segments.append(CoordinatesElement(parameter, self, 'Segments'))
             return CoordinatesElement(parameter, self, 'Segments')
