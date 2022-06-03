@@ -19,19 +19,17 @@ class Header:
 
 
     def writeTo(self, stream):
-        # verge-specific
-        HeaderSize = 64
+        HeaderSize = 40
         buffer = bytearray(HeaderSize)
         for i in range(HeaderSize):
             buffer[i] = 0xff
         buffer[0:len(self.signature)] = self.signature
-        buffer[11] = 0x06 # verge
         t = self.unknown.to_bytes(4, byteorder='little')
-        buffer[52:52+len(t)] = t
+        buffer[32:32+len(t)] = t
         t = self.parametersSize.to_bytes(4, byteorder='little')
-        buffer[56:56+len(t)] = t
-
-        self.hackBuffer(1, buffer)
+        buffer[36:36+len(t)] = t
+        buffer[32:36] = [0x59, 0x01, 0x00, 0x00] # hack
+        #self.hackBuffer(1, buffer)
         stream.write(buffer)
 
 
