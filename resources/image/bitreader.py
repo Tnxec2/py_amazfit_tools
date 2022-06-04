@@ -17,6 +17,9 @@ class BitReader():
         self.tryReadNext()
         return self._isDataPresent
 
+    def ReadByte(self):
+        return self.ReadBits(8)
+
     def ReadBit(self):
         return self.ReadBits(1) != 0
     
