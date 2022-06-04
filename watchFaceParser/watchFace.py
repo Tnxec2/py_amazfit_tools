@@ -9,6 +9,7 @@ from watchFaceParser.elements.battery import Battery
 from watchFaceParser.elements.analogDialFace import AnalogDialFace
 from watchFaceParser.elements.unknownType14 import UnknownType14
 from watchFaceParser.elements.weather import Weather
+from watchFaceParser.elements.dateExt import DateExtended
 
 class WatchFace:
     definitions = {
@@ -27,7 +28,7 @@ class WatchFace:
         15: { 'Name': 'Shortcuts', 'Type': Shortcuts}, # TODO: zepp 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
         16: { 'Name': 'Unknown16', 'Type': 'long?'}, # TODO: zepp U8tlMNRdHSjVK44n55Hj6fp41AEW3jD3FXPVWbqq
         17: { 'Name': 'Unknown17', 'Type': 'long?'}, # TODO: zepp 6T9UoXZxYRma9lv9DZH0infCu269fAck4EF6DPUw
-        18: { 'Name': 'Unknown18', 'Type': 'long?'}, # TODO: zepp 6EKQ2lOS3HFKbK4RJOEV4sgGbmOKqZrDFTinZdLe
+        18: { 'Name': 'DateExtended', 'Type': DateExtended}, # zepp 6EKQ2lOS3HFKbK4RJOEV4sgGbmOKqZrDFTinZdLe
         19: { 'Name': 'Unknown19-PAI?', 'Type': 'long?'}, # TODO: zepp iydgD8W5wmb7n3adhPSK9Dx0p3QLDexG3ZfKaxUo
         20: { 'Name': 'Unknown20', 'Type': 'long?'}, # TODO: zepp eARIxYKjIn6MXyuIdwekruLgWHo4sieDJ9JllMdP
         21: { 'Name': 'Unknown21', 'Type': 'long?'}, # TODO: zepp 6T9UoXZxYRma9lv9DZH0infCu269fAck4EF6DPUw
