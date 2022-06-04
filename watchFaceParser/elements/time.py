@@ -11,6 +11,14 @@ class Time:
         3: { 'Name': 'Seconds', 'Type': TwoDigits},
         4: { 'Name': 'AmPm', 'Type': AmPm},
         5: { 'Name': 'DrawingOrder', 'Type': DrawingOrder},
-        9: { 'Name': 'Unknown9', 'Type': 'long?'},
+        9: { 'Name': 'UnknownLong9', 'Type': 'long'},
+        10: { 'Name': 'Unknown10', 'Type': 'long?'}, # TODO: zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        11: { 'Name': 'Unknown11', 'Type': 'long?'}, # TODO: zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        12: { 'Name': 'Unknown12', 'Type': 'long?'}, # TODO: zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        13: { 'Name': 'Unknown13', 'Type': 'long?'}, # TODO: zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        14: { 'Name': 'Unknown14', 'Type': 'long?'}, # TODO: zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        15: { 'Name': 'Unknown15', 'Type': 'long?'}, # TODO: zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        16: { 'Name': 'Unknown16', 'Type': 'long?'}, # TODO: zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        17: { 'Name': 'Unknown17', 'Type': 'long?'}, # TODO: zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
     }
 

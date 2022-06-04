@@ -2,11 +2,9 @@
 from watchFaceParser.elements.basicElements.coordinates import Coordinates
 
 
-class IconSet:
+class LinearIconSet:
     definitions = {
         1: { 'Name': 'StartImageIndex', 'Type': 'long'},
-        2: { 'Name': 'X', 'Type': 'long'},
-        3: { 'Name': 'Y', 'Type': 'long'},
-        4: { 'Name': 'ImagesCount', 'Type': 'long'},
+        2: { 'Name': 'Segments', 'Type': [Coordinates]},
     }
 
