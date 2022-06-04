@@ -3,7 +3,7 @@ from watchFaceParser.elements.timeElements.amPm import AmPm
 from watchFaceParser.elements.timeElements.pm import Pm
 from watchFaceParser.elements.basicElements.image import Image
 from watchFaceParser.models.drawingOrder import DrawingOrder
-
+from watchFaceParser.elements.basicElements.number import Number
 class Time:
     definitions = {
         1: { 'Name': 'Hours', 'Type': TwoDigits},
@@ -12,13 +12,13 @@ class Time:
         4: { 'Name': 'AmPm', 'Type': AmPm},
         5: { 'Name': 'DrawingOrder', 'Type': DrawingOrder},
         9: { 'Name': 'UnknownLong9', 'Type': 'long'},
-        10: { 'Name': 'Unknown10', 'Type': 'long?'}, # TODO: zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
-        11: { 'Name': 'Unknown11', 'Type': 'long?'}, # TODO: zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
-        12: { 'Name': 'Unknown12', 'Type': 'long?'}, # TODO: zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
-        13: { 'Name': 'Unknown13', 'Type': 'long?'}, # TODO: zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
-        14: { 'Name': 'Unknown14', 'Type': 'long?'}, # TODO: zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
-        15: { 'Name': 'Unknown15', 'Type': 'long?'}, # TODO: zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
-        16: { 'Name': 'Unknown16', 'Type': 'long?'}, # TODO: zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
-        17: { 'Name': 'Unknown17', 'Type': 'long?'}, # TODO: zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        10: { 'Name': 'SunriseHours', 'Type': Number}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        11: { 'Name': 'SunriseMinutes', 'Type': Number}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        12: { 'Name': 'SunsetHours', 'Type': Number}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        13: { 'Name': 'SunsetMinutes', 'Type': Number}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        14: { 'Name': 'SunriseHoursNoDataImageIndex', 'Type': Image}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        15: { 'Name': 'SunriseMinutesNoDataImageIndex', 'Type': Image}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        16: { 'Name': 'SunsetHoursNoDataImageIndex', 'Type': Image}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        17: { 'Name': 'SunsetMinutesNoDataImageIndex', 'Type': Image}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
     }
 
