@@ -14,6 +14,7 @@ class WatchFace(ContainerElement):
         self._analogDial = None
         self._pulseStatus = None
         self._weekdayIcon = None
+        self._dateext = None
         super(WatchFace, self).__init__(parameters, parameter = None, parent = None, name = '')
 
     def draw3(self, drawer, images, state):
@@ -28,6 +29,8 @@ class WatchFace(ContainerElement):
         if self._battery:
             self._battery.draw3(drawer, images, state)
 
+        if self._dateext:
+            self._dateext.draw3(drawer, images, state)
         if self._date:
             self._date.draw3(drawer, images, state)
         if self._weekdayIcon:
@@ -91,7 +94,9 @@ class WatchFace(ContainerElement):
         elif parameterId == 17: # DistanceProgress
             pass
         elif parameterId == 18: # DateExtended
-            pass
+            from watchFaceParser.models.elements.dateExtElement import DateExtendedElement
+            self._dateext = DateExtendedElement(parameter)
+            return self._dateext
         elif parameterId == 20: # ActivityAlt
             pass
         elif parameterId == 21: # CaloriesProgress

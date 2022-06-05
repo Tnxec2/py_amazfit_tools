@@ -1,4 +1,4 @@
-from watchFaceParser.elements.timeElements.twoDigits import TwoDigits
+from watchFaceParser.elements.basicElements.separateDigits import  TwoDigits
 from watchFaceParser.elements.timeElements.amPm import AmPm
 from watchFaceParser.elements.timeElements.pm import Pm
 from watchFaceParser.elements.basicElements.image import Image
