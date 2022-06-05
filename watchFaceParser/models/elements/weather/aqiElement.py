@@ -15,7 +15,7 @@ class AqiElement(CompositeElement):
         if self._number:
             self._number.draw4(drawer, resources, state.getAqi())
         if self._icon:
-            self._icon.draw3(drawer, resources)
+            self._icon.draw2(drawer, resources)
 
     def createChildForParameter(self, parameter):
         from watchFaceParser.models.elements.basic.valueElement import ValueElement
@@ -24,7 +24,7 @@ class AqiElement(CompositeElement):
             from watchFaceParser.models.elements.common.numberElement import NumberElement
             self._number = NumberElement(parameter = parameter, parent = self, name = 'Number')
             return self._number
-        elif parameterId == 2:
+        elif parameterId == 4:
             from watchFaceParser.models.elements.common.imageElement import ImageElement
             self._icon = ImageElement(parameter = parameter, parent = self, name = 'Icon')
             return self._icon

@@ -15,13 +15,21 @@ class FourDigitsElement(CompositeElement):
     def draw3(self, drawer, images, number):
         assert(type(images) == list)
         assert(type(number) == int)
-        if number > 9999:
-            number = number % 1000
 
-        if self.getTens():
-            self.getTens().draw3(drawer, images, int(number / 10))
-        if self.getOnes():
-            self.getOnes().draw3(drawer, images, int(number % 10))
+        if number > 9999:
+            number = number % 10000
+
+        if self._thousands:
+            if int(number / 1000) > 0:
+                self._thousands.draw3(drawer, images, int(number / 1000))
+        if self._hundreds:
+            if (int(number / 1000) > 0 or int(number % 1000 / 100) > 0):
+                self._hundreds.draw3(drawer, images, int(number % 1000 / 100))
+        if self._tens:
+            if (int(number / 1000) > 0 or int(number % 1000 / 100) > 0 or int(number % 1000 % 100 / 10) > 0):
+                self._tens.draw3(drawer, images, int(number % 1000 % 100 / 10))
+        if self._ones:
+            self._ones.draw3(drawer, images, int(number % 1000 % 100 % 10))
 
 
     def createChildForParameter(self, parameter):

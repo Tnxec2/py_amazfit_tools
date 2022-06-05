@@ -15,14 +15,14 @@ class HumidityElement(CompositeElement):
         assert(type(resources) == list)
         if self._number:
             images = self._number.getImagesForNumber(resources, state.getHumidity())
-            if self.getSuffixImageIndex():
-                images.append(resources[self.getSuffixImageIndex()])
+            if self._suffix:
+                images.append(resources[self._suffix])
 
             from watchFaceParser.helpers.drawerHelper import DrawerHelper
             DrawerHelper.drawImages(drawer, images, uint2int(self._number.getSpacing()), self._number.getAlignment(), self._number.getBox())
 
         if self._icon:
-            self._icon.draw3(drawer, resources)
+            self._icon.draw2(drawer, resources)
 
     def createChildForParameter(self, parameter):
         from watchFaceParser.models.elements.basic.valueElement import ValueElement
