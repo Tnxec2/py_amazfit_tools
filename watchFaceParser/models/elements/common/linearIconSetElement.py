@@ -17,7 +17,7 @@ class LinearIconSetElement(CompositeElement):
         end = int(number / (goal / len(self._segments) ))
         if end > len(self._segments):
             end = len(self._segments) 
-        print(number, goal, end)
+        
         for i in range(end):
             image = resources[self._startImageIndex+i]
             x = self._segments[i].getX()

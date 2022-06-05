@@ -7,7 +7,7 @@ from watchFaceParser.elements.basicElements.linearIconSet import LinearIconSet
 class DistanceProgress:
     definitions = {
         
-        2: { 'Name': 'ImageSet', 'Type': ImageSet},
+        2: { 'Name': 'Icon', 'Type': ImageSet},
         3: { 'Name': 'Circle', 'Type': CircleScale},
     }
 

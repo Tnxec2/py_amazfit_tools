@@ -17,6 +17,7 @@ class WatchFace(ContainerElement):
         self._dateext = None
         self._activityAlt = None
         self._caloriesProgress = None
+        self._distanceProgress = None
         self._paiProgress = None
         super(WatchFace, self).__init__(parameters, parameter = None, parent = None, name = '')
 
@@ -35,6 +36,8 @@ class WatchFace(ContainerElement):
             self._pulseStatus.draw3(drawer, images, state)
         if self._paiProgress:
             self._paiProgress.draw3(drawer, images, state)
+        if self._distanceProgress:
+            self._distanceProgress.draw3(drawer, images, state)
         if self._weather:
             self._weather.draw3(drawer, images, state)
         if self._battery:
@@ -104,7 +107,9 @@ class WatchFace(ContainerElement):
             self._weekdayIcon = WeekdayStatusElement(parameter)
             return self._weekdayIcon
         elif parameterId == 17: # DistanceProgress
-            pass
+            from watchFaceParser.models.elements.activity.distanceProgressElement import DistanceProgressElement
+            self._distanceProgress = DistanceProgressElement(parameter)
+            return self._distanceProgress
         elif parameterId == 18: # DateExtended
             from watchFaceParser.models.elements.dateExtElement import DateExtendedElement
             self._dateext = DateExtendedElement(parameter)
