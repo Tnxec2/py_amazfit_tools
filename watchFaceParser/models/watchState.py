@@ -4,13 +4,14 @@ from watchFaceParser.models.weatherCondition import WeatherCondition
 
 
 class WatchState:
-    def __init__(self, BatteryLevel = 67, Pulse = 62, Steps = 14876, Calories = 764, Distance = 2367, Bluetooth = False, Unlocked = False, Alarm = False, DoNotDisturb = False, CurrentTemperature=-10, CurrentWeather = WeatherCondition.PartlyCloudy):
+    def __init__(self, BatteryLevel = 67, Pulse = 62, Steps = 14876, Calories = 764, PAI = 52, Distance = 2367, Bluetooth = False, Unlocked = False, Alarm = False, DoNotDisturb = False, CurrentTemperature=-10, CurrentWeather = WeatherCondition.PartlyCloudy):
         self._time = datetime.datetime.now().replace(hour = 10, minute = 10, second = 30)
         self._steps = Steps
         self._goal = 8000
         self._distance = Distance
         self._calories = Calories
         self._pulse = Pulse
+        self._pai = PAI
         self._batteryLevel = BatteryLevel
         self._bluetooth = Bluetooth
         self._unlocked = Unlocked
@@ -18,6 +19,9 @@ class WatchState:
         self._doNotDisturb = DoNotDisturb
         self._currentWeather = CurrentWeather
         self._currentTemperature = CurrentTemperature
+        self._sunrise = datetime.datetime.now().replace(hour = 05, minute = 31, second = 45)
+        self._sunset = datetime.datetime.now().replace(hour = 21, minute = 12, second = 38)
+
 
     def setCurrentWeather(self, n):
         self._currentWeather = n
@@ -50,6 +54,9 @@ class WatchState:
     def getPulse(self):
         return self._pulse
 
+    def getPAI(self):
+        return self._pai
+
 
     def getBatteryLevel(self):
         return self._batteryLevel
@@ -78,13 +85,19 @@ class WatchState:
     def getDoNotDisturb(self):
         return self._doNotDisturb
 
+    def getSunrise(self):
+        return self._sunrise
+    def getSunset(self):
+        return self._sunset
+
 
     def toJSON(self):
         return {
-            'Time': self.datetimeToJson(),
+            'Time': self.datetimeToJson(self._time),
             'Steps': self._steps,
             'Goal': self._goal,
             'Pulse': self._pulse,
+            'PAI': self._pai,
             'BatteryLevel': self._batteryLevel,
             'Distance': self._distance,
             'Calories': self._calories,
@@ -94,10 +107,11 @@ class WatchState:
             'DoNotDisturb': self._doNotDisturb,
             'CurrentWeather': self._currentWeather,
             'CurrentTemperature': self._currentTemperature,
+            'Sunrise': self.datetimeToJson(self._sunrise),
+            'Sunset': self.datetimeToJson(self._sunset),
         }
 
-    def datetimeToJson(self):
-        t = self._time
+    def datetimeToJson(self, t):
         return { 'Year': t.year, 'Month': t.month, 'Day': t.day, 'Hour': t.hour, 'Minute': t.minute, 'Second': t.second }
 
 
@@ -105,9 +119,12 @@ class WatchState:
     def fromJson(j):
         w = WatchState()
         w._time = j['Time']
+        w._sunrise = j['Sunrise'] if 'Sunrise' in j else w._sunrise
+        w._sunset = j['Sunset'] if 'Sunset' in j else w._sunset
         w._steps = j['Steps']
         w._goal = j['Goal']
         w._pulse = j['Pulse']
+        w._pai = j['PAI'] if 'PAI' in j else w._pai
         w._batteryLevel = j['BatteryLevel']
         w._distance = j['Distance']
         w._calories = j['Calories']

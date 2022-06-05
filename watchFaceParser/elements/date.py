@@ -10,7 +10,7 @@ class Date:
         2: { 'Name': 'WeekDay', 'Type': ImageSet},
         3: { 'Name': 'WeekDayCh', 'Type': ImageSet},
         4: { 'Name': 'WeekDayCn', 'Type': ImageSet},
-        11: { 'Name': 'Unknown11', 'Type': NumberExtended}, # TODO: zepp eARIxYKjIn6MXyuIdwekruLgWHo4sieDJ9JllMdP
-        12: { 'Name': 'Unknown12', 'Type': NumberExtended}, # TODO: zepp eARIxYKjIn6MXyuIdwekruLgWHo4sieDJ9JllMdP
+        11: { 'Name': 'MonthAlt', 'Type': NumberExtended}, # zepp eARIxYKjIn6MXyuIdwekruLgWHo4sieDJ9JllMdP
+        12: { 'Name': 'DayAlt', 'Type': NumberExtended}, # zepp eARIxYKjIn6MXyuIdwekruLgWHo4sieDJ9JllMdP
     }
 

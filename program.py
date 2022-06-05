@@ -239,6 +239,7 @@ class Parser:
                 Pulse = 60 + num * 2,
                 Steps = num * 1000,
                 Calories = num * 75,
+                PAI = num * 6,
                 Distance = num * 700,
                 Bluetooth = num > 1 and num < 6,
                 Unlocked = num > 2 and num < 7,

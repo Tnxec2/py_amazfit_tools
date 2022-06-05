@@ -16,9 +16,9 @@ class Time:
         11: { 'Name': 'SunriseMinutes', 'Type': Number}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
         12: { 'Name': 'SunsetHours', 'Type': Number}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
         13: { 'Name': 'SunsetMinutes', 'Type': Number}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
-        14: { 'Name': 'SunriseHoursNoDataImageIndex', 'Type': Image}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
-        15: { 'Name': 'SunriseMinutesNoDataImageIndex', 'Type': Image}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
-        16: { 'Name': 'SunsetHoursNoDataImageIndex', 'Type': Image}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
-        17: { 'Name': 'SunsetMinutesNoDataImageIndex', 'Type': Image}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        14: { 'Name': 'SunriseHoursNoDataImage', 'Type': Image}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        15: { 'Name': 'SunriseMinutesNoDataImage', 'Type': Image}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        16: { 'Name': 'SunsetHoursNoDataImage', 'Type': Image}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
+        17: { 'Name': 'SunsetMinutesNoDataImage', 'Type': Image}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
     }
 

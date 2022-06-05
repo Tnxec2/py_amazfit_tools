@@ -52,5 +52,21 @@ class WatchFace(ContainerElement):
             from watchFaceParser.models.elements.analogDialElement import AnalogDialElement
             self._analogDial = AnalogDialElement(parameter)
             return self._analogDial
+        elif parameterId == 13: # Pulse Status
+            pass
+        elif parameterId == 15: # Shortcuts?
+            pass
+        elif parameterId == 16: # WeekdayIcon
+            pass
+        elif parameterId == 17: # DistanceProgress
+            pass
+        elif parameterId == 18: # DateExtended
+            pass
+        elif parameterId == 20: # ActivityAlt
+            pass
+        elif parameterId == 21: # CaloriesProgress
+            pass
+        elif parameterId == 22: # PaiProgress
+            pass
         else:
             return super(WatchFace, self).createChildForParameter(parameter)

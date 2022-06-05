@@ -8,7 +8,7 @@ class NumberExtended:
         4: { 'Name': 'BottomRightY', 'Type': 'long'},
         5: { 'Name': 'Alignment', 'Type': TextAlignment},
         6: { 'Name': 'Spacing', 'Type': 'long'},
-        7: { 'Name': 'Padding', 'Type': 'long'},
+        7: { 'Name': 'VerticalOffset', 'Type': 'long'},
         8: { 'Name': 'ImageIndex', 'Type': 'long'},
         9: { 'Name': 'ImagesCount', 'Type': 'long'}
     }

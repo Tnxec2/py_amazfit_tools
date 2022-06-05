@@ -1,6 +1,6 @@
 class DrawerHelper:
     @staticmethod
-    def calculateBounds(images, spacing):
+    def calculateBounds(images, spacing, verticaloffset = 0):
         assert(type(images) == list)
         assert(type(spacing) == int)
 
@@ -20,12 +20,14 @@ class DrawerHelper:
 
 
     @staticmethod
-    def drawImages(drawer, images, spacing, alignment, box):
+    def drawImages(drawer, images, spacing, alignment, box, verticaloffset = 0):
         assert(type(images) == list)
         assert(type(spacing) == int)
         assert(type(alignment) == int)
 
-        (bitmapWidth, bitmapHeight) = DrawerHelper.calculateBounds(images, spacing)
+        # TODO: vertical offset implement
+
+        (bitmapWidth, bitmapHeight) = DrawerHelper.calculateBounds(images, spacing, verticaloffset)
 
         from watchFaceParser.models.textAlignment import TextAlignment
         alignmentFlag = TextAlignment(alignment)

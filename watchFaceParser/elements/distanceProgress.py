@@ -4,9 +4,10 @@ from watchFaceParser.elements.basicElements.imageSet import ImageSet
 from watchFaceParser.elements.basicElements.iconSet import IconSet
 from watchFaceParser.elements.basicElements.linearIconSet import LinearIconSet
 
-class CaloriesProgress:
+class DistanceProgress:
     definitions = {
-        2: { 'Name': 'Icon', 'Type': ImageSet},
-        4: { 'Name': 'Circle', 'Type': CircleScale},
+        
+        2: { 'Name': 'ImageSet', 'Type': ImageSet},
+        3: { 'Name': 'Circle', 'Type': CircleScale},
     }
 

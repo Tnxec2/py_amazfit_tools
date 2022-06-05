@@ -10,7 +10,14 @@ class TimeElement(ContainerElement):
         self._seconds = None
         self._amPm = None
         self._drawingOrder = None
-        self._delimiter = None
+        self._sunriseHours = None
+        self._sunriseMinutes = None
+        self._sunsetHours = None
+        self._sunsetMinutes = None
+        self._sunriseHoursNoData = None
+        self._sunriseMinutesNoData = None
+        self._sunsetHoursNoData = None
+        self._sunsetMinutesNoData = None
         self._pm = None
         super(TimeElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
@@ -39,6 +46,16 @@ class TimeElement(ContainerElement):
             self._seconds.draw3(drawer, images, state.getTime().second)
         if self._delimiter:
             self._delimiter.draw3(drawer, images, state)
+        
+        if self._sunriseHours:
+            self._sunriseHours.draw4(drawer, images, state.getSunrise().hour, 2 )        
+        if self._sunriseMinutes:
+            self._sunriseMinutes.draw4(drawer, images, state.getSunrise().minutes, 2 )
+            
+        if self._sunsetHours:
+            self._sunsetHours.draw4(drawer, images, state.getSunset().hour, 2 )        
+        if self._sunsetMinutes:
+            self._sunsetMinutes.draw4(drawer, images, state.getSunset().minutes, 2 )
 
 
     def createChildForParameter(self, parameter):
@@ -62,13 +79,37 @@ class TimeElement(ContainerElement):
         elif parameterId == 5:
             pass
         elif parameterId == 10:
-            from watchFaceParser.models.elements.common.imageElement import ImageElement
-            self._delimiter = ImageElement(parameter = parameter, parent = self, name = 'Delimiter')
-            return self._delimiter
+            from watchFaceParser.models.elements.common.numberElement import NumberElement
+            self._sunriseHours = NumberElement(parameter = parameter, parent = self, name = 'SunriseHours')
+            return self._sunriseHours
+        elif parameterId == 11:
+            from watchFaceParser.models.elements.common.numberElement import NumberElement
+            self._sunriseMinutes = NumberElement(parameter = parameter, parent = self, name = 'SunriseMinutes')
+            return self._sunriseMinutes
         elif parameterId == 12:
-            from watchFaceParser.models.elements.time.pmElement import PmElement
-            self._pm = PmElement(parameter = parameter, parent = self, name = 'Pm')
-            return self._pm
+            from watchFaceParser.models.elements.common.numberElement import NumberElement
+            self._sunsetHours = NumberElement(parameter = parameter, parent = self, name = 'SunsetHours')
+            return self._sunsetHours
+        elif parameterId == 13:
+            from watchFaceParser.models.elements.common.numberElement import NumberElement
+            self._sunsetMinutes = NumberElement(parameter = parameter, parent = self, name = 'SunsetMinutes')
+            return self._sunsetMinutes
+        elif parameterId == 14:
+            self._sunriseHoursNoData = parameter.getValue()
+            from watchFaceParser.models.elements.basic.valueElement import ValueElement
+            return ValueElement(parameter, self, 'SunriseHoursNoDataImage')
+        elif parameterId == 15:
+            self._sunriseMinutesNoData = parameter.getValue()
+            from watchFaceParser.models.elements.basic.valueElement import ValueElement
+            return ValueElement(parameter, self, 'SunriseMinutesNoDataImage')
+        elif parameterId == 16:
+            self._sunsetHoursNoData = parameter.getValue()
+            from watchFaceParser.models.elements.basic.valueElement import ValueElement
+            return ValueElement(parameter, self, 'SunsetHoursNoDataImage')
+        elif parameterId == 17:
+            self._sunsetMinutesNoData = parameter.getValue()
+            from watchFaceParser.models.elements.basic.valueElement import ValueElement
+            return ValueElement(parameter, self, 'SunsetMinutesNoDataImage')
         else:
             return super(TimeElement, self).createChildForParameter(parameter)
 
