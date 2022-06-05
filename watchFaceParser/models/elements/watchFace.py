@@ -13,7 +13,32 @@ class WatchFace(ContainerElement):
         self._battery = None
         self._analogDial = None
         self._pulseStatus = None
+        self._weekdayIcon = None
         super(WatchFace, self).__init__(parameters, parameter = None, parent = None, name = '')
+
+    def draw3(self, drawer, images, state):
+        if self._background:
+            self._background.draw3(drawer, images, state)
+        if self._activity:
+            self._activity.draw3(drawer, images, state)
+        if self._stepsProgress:
+            self._stepsProgress.draw3(drawer, images, state)
+        if self._weather:
+            self._weather.draw3(drawer, images, state)
+        if self._battery:
+            self._battery.draw3(drawer, images, state)
+
+        if self._date:
+            self._date.draw3(drawer, images, state)
+        if self._weekdayIcon:
+            self._weekdayIcon.draw3(drawer, images, state)
+        if self._time:
+            self._time.draw3(drawer, images, state)
+        if self._analogDial:
+            self._analogDial.draw3(drawer, images, state)
+        if self._status:
+            self._status.draw3(drawer, images, state)
+
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
@@ -60,7 +85,9 @@ class WatchFace(ContainerElement):
         elif parameterId == 15: # Shortcuts?
             pass
         elif parameterId == 16: # WeekdayIcon
-            pass
+            from watchFaceParser.models.elements.date.weekdayStatusElement import WeekdayStatusElement
+            self._weekdayIcon = WeekdayStatusElement(parameter)
+            return self._weekdayIcon
         elif parameterId == 17: # DistanceProgress
             pass
         elif parameterId == 18: # DateExtended
