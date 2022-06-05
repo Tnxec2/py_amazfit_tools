@@ -64,7 +64,7 @@ class ActivityAltElement(ContainerElement):
             from watchFaceParser.models.elements.basic.valueElement import ValueElement
             self._unknown6ImageIndex = parameter.getValue() 
             return ValueElement(parameter, self, 'Unknow6ImageIndex')
-        elif parameterId == 7:
+        elif parameterId == 9:
             from watchFaceParser.models.elements.activity.distanceAltElement import DistanceAltElement
             self._distance = DistanceAltElement(parameter = parameter, parent = self, name = 'Distance')
             return self._distance

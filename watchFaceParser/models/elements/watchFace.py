@@ -24,10 +24,7 @@ class WatchFace(ContainerElement):
     def draw3(self, drawer, images, state):
         if self._background:
             self._background.draw3(drawer, images, state)
-        if self._activity:
-            self._activity.draw3(drawer, images, state)
-        if self._activityAlt:
-            self._activityAlt.draw3(drawer, images, state)
+            
         if self._stepsProgress:
             self._stepsProgress.draw3(drawer, images, state)
         if self._caloriesProgress:
@@ -38,6 +35,12 @@ class WatchFace(ContainerElement):
             self._paiProgress.draw3(drawer, images, state)
         if self._distanceProgress:
             self._distanceProgress.draw3(drawer, images, state)
+
+        if self._activity:
+            self._activity.draw3(drawer, images, state)
+        if self._activityAlt:
+            self._activityAlt.draw3(drawer, images, state)
+
         if self._weather:
             self._weather.draw3(drawer, images, state)
         if self._battery:

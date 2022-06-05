@@ -9,7 +9,6 @@ class DistanceProgressElement(ContainerElement):
         super(DistanceProgressElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
     def draw3(self, drawer, images, state):
-        print(state.getDistance())
         if self._icon:
             self._icon.draw4(drawer, images, state.getDistance(), 4000)
 
@@ -18,11 +17,11 @@ class DistanceProgressElement(ContainerElement):
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
-        if parameterId == 2:
+        if parameterId == 1:
             pass
         elif parameterId == 2:
             from watchFaceParser.models.elements.common.imageSetElement import ImageSetElement
-            self._icon = ImageSetElement(parameter = parameter, parent = self, name = 'Icons')
+            self._icon = ImageSetElement(parameter = parameter, parent = self, name = 'Icon')
             return self._icon
         elif parameterId == 3:
             from watchFaceParser.models.elements.common.circularProgressElement import CircularProgressElement # temp.

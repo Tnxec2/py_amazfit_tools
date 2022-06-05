@@ -18,7 +18,7 @@ class CaloriesProgressElement(ContainerElement):
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
-        if parameterId == 2:
+        if parameterId == 1:
             pass
         elif parameterId == 2:
             from watchFaceParser.models.elements.common.imageSetElement import ImageSetElement

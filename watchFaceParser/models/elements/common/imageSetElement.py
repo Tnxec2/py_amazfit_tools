@@ -13,6 +13,7 @@ class ImageSetElement(ImageElement):
 
     def draw4(self, drawer, resources, value, total):
         index = int(value / ( total / self._imagesCount))
+
         self.draw3(drawer, resources, index)
 
     def draw3(self, drawer, resources, index):

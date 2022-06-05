@@ -1,4 +1,5 @@
 ﻿import logging
+import resource
 
 from watchFaceParser.models.elements.basic.compositeElement import CompositeElement
 from watchFaceParser.utils.parametersConverter import uint2int
@@ -25,6 +26,10 @@ class DistanceAltElement(CompositeElement):
 
         from watchFaceParser.helpers.drawerHelper import DrawerHelper
         DrawerHelper.drawImages(drawer, images, uint2int(self._number.getSpacing()), self._number.getAlignment(), self._number.getBox(), self._number.getVerticalOffset())
+        
+        if self._suffixImageIcon:
+            self._suffixImageIcon.draw3(drawer, resource, None)
+
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
