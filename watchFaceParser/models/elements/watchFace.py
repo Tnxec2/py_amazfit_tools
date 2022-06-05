@@ -15,6 +15,7 @@ class WatchFace(ContainerElement):
         self._pulseStatus = None
         self._weekdayIcon = None
         self._dateext = None
+        self._activityAlt = None
         super(WatchFace, self).__init__(parameters, parameter = None, parent = None, name = '')
 
     def draw3(self, drawer, images, state):
@@ -22,6 +23,8 @@ class WatchFace(ContainerElement):
             self._background.draw3(drawer, images, state)
         if self._activity:
             self._activity.draw3(drawer, images, state)
+        if self._activityAlt:
+            self._activityAlt.draw3(drawer, images, state)
         if self._stepsProgress:
             self._stepsProgress.draw3(drawer, images, state)
         if self._weather:
@@ -45,6 +48,7 @@ class WatchFace(ContainerElement):
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
+
         if parameterId == 2:
             from watchFaceParser.models.elements.backgroundElement import BackgroundElement
             self._background = BackgroundElement(parameter)
@@ -98,7 +102,9 @@ class WatchFace(ContainerElement):
             self._dateext = DateExtendedElement(parameter)
             return self._dateext
         elif parameterId == 20: # ActivityAlt
-            pass
+            from watchFaceParser.models.elements.activityAltElement import ActivityAltElement
+            self._activityAlt = ActivityAltElement(parameter)
+            return self._activityAlt
         elif parameterId == 21: # CaloriesProgress
             pass
         elif parameterId == 22: # PaiProgress

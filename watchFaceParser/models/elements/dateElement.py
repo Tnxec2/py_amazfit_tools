@@ -18,9 +18,9 @@ class DateElement(ContainerElement):
         if self._weekDay:
             self._weekDay.draw3(drawer, images, state)
         if self._monthalt:
-            self._monthalt.draw4(drawer, images, state.getMonth(), 2)
+            self._monthalt.draw4(drawer, images, state.getTime().month, 2)
         if self._dayalt:
-            self._dayalt.draw4(drawer, images, state.getDay(), 2)
+            self._dayalt.draw4(drawer, images, state.getTime().day, 2)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
@@ -38,7 +38,7 @@ class DateElement(ContainerElement):
             return self._monthalt
         elif parameterId == 12:
             from watchFaceParser.models.elements.common.numberExtendedElement import NumberExtendedElement
-            self._dayalt = WeekDayElement(parameter = parameter, parent = self, name = 'DayAlt')
+            self._dayalt = NumberExtendedElement(parameter = parameter, parent = self, name = 'DayAlt')
             return self._dayalt
         else:
             return super(DateElement, self).createChildForParameter(parameter)

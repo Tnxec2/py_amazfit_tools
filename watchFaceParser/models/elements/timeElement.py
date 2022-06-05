@@ -27,8 +27,6 @@ class TimeElement(ContainerElement):
         if self._amPm:
             self._amPm.draw3(drawer, images, state)
 
-        logging.debug(state.getTime())
-
         hours = state.getTime().hour if self._amPm is None else state.getTime().hour % 12
         # drawingOrder = 0x1234 if self.getDrawingOrder() is None else self.getDrawingOrder()
 

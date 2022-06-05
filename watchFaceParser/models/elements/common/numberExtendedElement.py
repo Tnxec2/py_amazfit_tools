@@ -2,6 +2,7 @@
 
 from watchFaceParser.models.elements.common.coordinatesElement import CoordinatesElement
 from watchFaceParser.helpers.drawerHelper import DrawerHelper
+from watchFaceParser.utils.parametersConverter import uint2int
 
 class Box:
     def __init__(self, x, y, width, height):
@@ -90,8 +91,14 @@ class NumberExtendedElement(CoordinatesElement):
         return Box(altCoordinates.getX(), altCoordinates.getY(), self.getBottomRightX() - self.getX(), self.getBottomRightY() - self.getY())
 
 
+    def draw5(self, drawer, resources, number, minimumDights = 1, suffix = None):
+        if suffix is None:
+            return self.draw4(drawer, resources, number, minimumDights)
+        images = self.getImagesForNumber(resources, number)
+        images.append(resources[suffix])
+        DrawerHelper.drawImages(drawer, images, uint2int(self.getSpacing()), self.getAlignment(), self.getBox(), self.getVerticalOffset())
+        
     def draw4(self, drawer, images, number, minimumDights = 1):
-        from watchFaceParser.helpers.drawerHelper import DrawerHelper
         DrawerHelper.drawImages(drawer, self.getImagesForNumber(images, number, minimumDights), self.getSpacing(), self.getAlignment(), self.getBox(), self.getVerticalOffset())
 
 
