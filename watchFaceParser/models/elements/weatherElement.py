@@ -7,6 +7,8 @@ class WeatherElement(ContainerElement):
     def __init__(self, parameter, parent = None, name = None):
         self._icon = None
         self._temperature = None
+        self._aqi = None
+        self._humidity = None
         super(WeatherElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
     def createChildForParameter(self, parameter):
@@ -19,5 +21,13 @@ class WeatherElement(ContainerElement):
             from watchFaceParser.models.elements.weather.temperatureElement import TemperatureElement
             self._temperature = TemperatureElement(parameter = parameter, parent = self, name = 'Temperature')
             return self._temperature
+        elif parameterId == 3:
+            from watchFaceParser.models.elements.weather.aqiElement import AqiElement
+            self._aqi = AqiElement(parameter = parameter, parent = self, name = 'AQI')
+            return self._aqi
+        elif parameterId == 4:
+            from watchFaceParser.models.elements.weather.humidityElement import HumidityElement
+            self._humidity = HumidityElement(parameter = parameter, parent = self, name = 'Humidity')
+            return self._humidity
         else:
             return super(WeatherElement, self).createChildForParameter(parameter)

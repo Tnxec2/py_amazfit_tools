@@ -4,7 +4,7 @@ from watchFaceParser.models.weatherCondition import WeatherCondition
 
 
 class WatchState:
-    def __init__(self, BatteryLevel = 67, Pulse = 62, Steps = 14876, Calories = 764, PAI = 52, Distance = 2367, Bluetooth = False, Unlocked = False, Alarm = False, DoNotDisturb = False, CurrentTemperature=-10, CurrentWeather = WeatherCondition.PartlyCloudy):
+    def __init__(self, BatteryLevel = 67, Pulse = 62, Steps = 14876, Calories = 764, PAI = 52, Distance = 2367, Bluetooth = False, Unlocked = False, Alarm = False, DoNotDisturb = False, CurrentTemperature=-10, CurrentWeather = WeatherCondition.PartlyCloudy, Aqi = 15, Humidity = 68):
         self._time = datetime.datetime.now().replace(hour = 10, minute = 10, second = 30)
         self._steps = Steps
         self._goal = 8000
@@ -19,7 +19,9 @@ class WatchState:
         self._doNotDisturb = DoNotDisturb
         self._currentWeather = CurrentWeather
         self._currentTemperature = CurrentTemperature
-        self._sunrise = datetime.datetime.now().replace(hour = 05, minute = 31, second = 45)
+        self._aqi = Aqi
+        self._humidity = Humidity
+        self._sunrise = datetime.datetime.now().replace(hour = 6, minute = 23, second = 12)
         self._sunset = datetime.datetime.now().replace(hour = 21, minute = 12, second = 38)
 
 
@@ -89,6 +91,12 @@ class WatchState:
         return self._sunrise
     def getSunset(self):
         return self._sunset
+    
+    def getAqi(self):
+        return self._aqi
+
+    def getHumidity(self):
+        return self._humidity
 
 
     def toJSON(self):
@@ -109,6 +117,9 @@ class WatchState:
             'CurrentTemperature': self._currentTemperature,
             'Sunrise': self.datetimeToJson(self._sunrise),
             'Sunset': self.datetimeToJson(self._sunset),
+            'AQI': self._aqi,
+            'Humidity': self._humidity,
+
         }
 
     def datetimeToJson(self, t):
@@ -134,5 +145,7 @@ class WatchState:
         w._doNotDisturb = j['DoNotDisturb']
         w._currentWeather = j['CurrentWeather'] if 'CurrentWeather' in j else w._currentWeather
         w._currentTemperature = j['CurrentTemperature'] if 'CurrentTemperature' in j else w._currentTemperature
+        w._aqi = j['AQI'] if 'AQI' in j else w._aqi
+        w._humidity = j['Humidity'] if 'Humidity' in j else w._humidity
         return w
 

@@ -44,8 +44,6 @@ class TimeElement(ContainerElement):
 
         if self._seconds:
             self._seconds.draw3(drawer, images, state.getTime().second)
-        if self._delimiter:
-            self._delimiter.draw3(drawer, images, state)
         
         if self._sunriseHours:
             self._sunriseHours.draw4(drawer, images, state.getSunrise().hour, 2 )        

@@ -21,15 +21,11 @@ class BatteryElement(ContainerElement):
             return self._text
         elif parameterId == 2:
             from watchFaceParser.models.elements.battery.batteryGaugeElement import BatteryGaugeElement # temp.
-            self._images = BatteryGaugeElement(parameter = parameter, parent = self, name = '?_images?')
+            self._images = BatteryGaugeElement(parameter = parameter, parent = self, name = '?Icon?')
             return self._images
-        elif parameterId == 6:
-            from watchFaceParser.models.elements.common.imageElement import ImageElement
-            self._percent = ImageElement(parameter = parameter, parent = self, name = '?_percent?')
-            return self._percent
-        elif parameterId == 7:
-            from watchFaceParser.models.elements.battery.circularBatteryElement import CircularBatteryElement
-            self._scale = CircularBatteryElement(parameter = parameter, parent = self, name = '_scale')
+        elif parameterId == 3:
+            from watchFaceParser.models.elements.battery.batteryIconsetElement import BatteryIconSetElement
+            self._scale = BatteryIconSetElement(parameter = parameter, parent = self, name = 'Scale')
             return self._scale
         else:
             return super(BatteryElement, self).createChildForParameter(parameter)

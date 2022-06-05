@@ -18,7 +18,6 @@ class ClockHandElement(CompositeElement):
         assert(type(resources) == list)
 
         angle = 90 - (value * 360 / total)
-        print(value, total, angle)
 
         from PIL import Image, ImageDraw
         
@@ -40,25 +39,25 @@ class ClockHandElement(CompositeElement):
         (dw, dh) = (drawer.size[0], drawer.size[1])
         drawer.paste(temp, ( int(dw/2 - nw/2), int(dh/2 - nh/2)), temp)
 
+
         if self._centerImage:
-            angle = 360 - int(value * 360. / total)
-            self._centerImage.draw2(drawer, resources, angle)
+            self._centerImage.draw2(drawer, resources)
 
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
-        if parameterId == 5:
+        if parameterId == 1:
             self._onlyBorder = parameter.getValue()
             return ValueElement(parameter = parameter, parent = self, name = 'OnlyBorder')
         elif parameterId == 2:
             from resources.image.color import Color
             self._color = Color.fromArgb(0xff000000 | parameter.getValue())
             return ValueElement(parameter = parameter, parent = self, name = 'Color')
-        elif parameter.getId() == 3:
+        elif parameterId == 3:
             from watchFaceParser.models.elements.common.coordinatesElement import CoordinatesElement
             self._center = CoordinatesElement(parameter = parameter, parent = self, name = 'Center')
             return self._centerImage
-        elif parameter.getId() == 4:
+        elif parameterId == 4:
             from watchFaceParser.models.elements.common.coordinatesElement import CoordinatesElement
             self._shape.append(CoordinatesElement(parameter, self, 'Shape'))
             return CoordinatesElement(parameter, self, 'Shape')

@@ -1,9 +1,9 @@
 ﻿import logging
 
-from watchFaceParser.models.elements.common.circularProgressElement import CircularProgressElement
+from watchFaceParser.models.elements.common.iconSetElement import IconSetElement
 
 
-class CircularBatteryElement(CircularProgressElement):
+class CircularBatteryElement(IconSetElement):
     def __init__(self, parameter, parent, name = None):
         super(CircularBatteryElement, self).__init__(parameter = parameter, parent = parent, name = name)
 

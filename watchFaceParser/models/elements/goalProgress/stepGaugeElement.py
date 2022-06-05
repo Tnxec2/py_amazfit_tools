@@ -1,12 +1,12 @@
 ﻿import logging
 
-from watchFaceParser.models.elements.common.imageSetElement import ImageSetElement
+from watchFaceParser.models.elements.common.linearIconSetElement import LinearIconSetElement
 
-class StepGaugeElement(ImageSetElement):
+class StepGaugeElement(LinearIconSetElement):
     def __init__(self, parameter, parent, name = None):
         super(StepGaugeElement, self).__init__(parameter = parameter, parent = parent, name = name)
 
     def draw3(self, drawer, resources, state):
         assert(type(resources) == list)
-        super(StepGaugeElement, self).draw3(drawer, resources, int(state.getSteps() / state.getGoal() * self.getImagesCount()))
+        super(StepGaugeElement, self).draw4(drawer, resources, state.getSteps(), state.getGoal())
 

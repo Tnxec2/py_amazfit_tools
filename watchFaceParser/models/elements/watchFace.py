@@ -12,6 +12,7 @@ class WatchFace(ContainerElement):
         self._status = None
         self._battery = None
         self._analogDial = None
+        self._pulseStatus = None
         super(WatchFace, self).__init__(parameters, parameter = None, parent = None, name = '')
 
     def createChildForParameter(self, parameter):
@@ -53,7 +54,9 @@ class WatchFace(ContainerElement):
             self._analogDial = AnalogDialElement(parameter)
             return self._analogDial
         elif parameterId == 13: # Pulse Status
-            pass
+            from watchFaceParser.models.elements.activity.pulseStatusElement import PulseStatusElement
+            self._pulseStatus = PulseStatusElement(parameter)
+            return self._pulseStatus
         elif parameterId == 15: # Shortcuts?
             pass
         elif parameterId == 16: # WeekdayIcon

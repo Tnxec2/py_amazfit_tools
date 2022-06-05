@@ -22,7 +22,7 @@ class ImageElement(CoordinatesElement):
         self.draw2(drawer, resources, None)
 
 
-    def draw2(self, drawer, images, angle):
+    def draw2(self, drawer, images, angle = None):
         x = self.getX()
         y = self.getY()
         if angle is None:
