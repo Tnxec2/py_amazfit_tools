@@ -25,7 +25,7 @@ class ImageElement(CoordinatesElement):
     def draw2(self, drawer, images, angle = None):
         x = self.getX()
         y = self.getY()
-        print(self._imageIndex)
+
         if angle is None:
             temp = images[self.getImageIndex()].getBitmap()
             drawer.paste(temp, (x,y), temp)

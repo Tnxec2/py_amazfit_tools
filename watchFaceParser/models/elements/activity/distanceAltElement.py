@@ -28,7 +28,7 @@ class DistanceAltElement(CompositeElement):
         DrawerHelper.drawImages(drawer, images, uint2int(self._number.getSpacing()), self._number.getAlignment(), self._number.getBox(), self._number.getVerticalOffset())
         
         if self._suffixImageIcon:
-            self._suffixImageIcon.draw3(drawer, resource, None)
+            self._suffixImageIcon.draw2(drawer, resources, None)
 
 
     def createChildForParameter(self, parameter):

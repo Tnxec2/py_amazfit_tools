@@ -11,7 +11,7 @@ class Time:
         3: { 'Name': 'Seconds', 'Type': TwoDigits},
         4: { 'Name': 'AmPm', 'Type': AmPm},
         5: { 'Name': 'DrawingOrder', 'Type': DrawingOrder},
-        9: { 'Name': 'UnknownLong9', 'Type': 'long'},
+        9: { 'Name': 'UnknownBoolean9', 'Type': 'bool'},
         10: { 'Name': 'SunriseHours', 'Type': Number}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
         11: { 'Name': 'SunriseMinutes', 'Type': Number}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
         12: { 'Name': 'SunsetHours', 'Type': Number}, # zepp: 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J

@@ -11,26 +11,19 @@ class OneLineMonthAndDayElement(CompositeElement):
         super(OneLineMonthAndDayElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
 
-    def getNumber(self):
-        return self._number
-
-
-    def getDelimiterImageIndex(self):
-        return self._delimiterImageIndex.getValue()
-
-
-    def draw3(self, drawer, resources, state):
+    def draw4(self, drawer, resources, state):
         assert(type(resources) == list)
         monthAndDay = self._parent
 
-        images = self.getNumber().getImagesForNumber(resources, state.getTime().month, 2 if monthAndDay.getTwoDigitsMonth() else 1)
+        images = self._number.getImagesForNumber(resources, state.getTime().month, 2 if monthAndDay.getTwoDigitsMonth() else 1)
 
-        images.append(resources[self.getDelimiterImageIndex()])
-        for image in self.getNumber().getImagesForNumber(resources, state.getTime().day, 2 if monthAndDay.getTwoDigitsDay() else 1):
+        if (self._delimiterImageIndex):
+            images.append(resources[self._delimiterImageIndex])
+        for image in self._number.getImagesForNumber(resources, state.getTime().day, 2 if monthAndDay.getTwoDigitsDay() else 1):
             images.append(image)
 
         from watchFaceParser.helpers.drawerHelper import DrawerHelper
-        DrawerHelper.drawImages(drawer, images, uint2int(self.getNumber().getSpacing()), self.getNumber().getAlignment(), self.getNumber().getBox())
+        DrawerHelper.drawImages(drawer, images, uint2int(self._number.getSpacing()), self._number.getAlignment(), self._number.getBox())
 
 
     def createChildForParameter(self, parameter):

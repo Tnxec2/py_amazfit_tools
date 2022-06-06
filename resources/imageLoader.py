@@ -39,5 +39,6 @@ class ImageLoader:
     @staticmethod
     def openImage(fullFileName):
         from PIL import Image
-        image = Image.open(fullFileName)
+        #image = Image.open(fullFileName)
+        image = Image.open(fullFileName).convert("RGBA")
         return image

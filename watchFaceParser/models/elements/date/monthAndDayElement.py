@@ -12,20 +12,11 @@ class MonthAndDayElement(ContainerElement):
         super(MonthAndDayElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
 
-    def getOneLine(self):
-        return self._oneLine
-
-
-    def getSeparate(self):
-        return self._separate
-
-
-    def getTwoDigitsMonth(self):
-        return self._twoDigitsMonth
-
-
-    def getTwoDigitsDay(self):
-        return self._twoDigitsDay
+    def draw3(self, drawer, images, state):
+        if ( self._separate):
+            self._separate.draw4(drawer, images, state, self._twoDigitsMonth, self._twoDigitsDay)
+        if ( self._oneLine):
+            self._oneLine.draw4(drawer, images, state, self._twoDigitsMonth, self._twoDigitsDay)
 
 
     def createChildForParameter(self, parameter):

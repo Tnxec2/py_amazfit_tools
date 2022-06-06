@@ -11,28 +11,17 @@ class SeparateMonthAndDayElement(CompositeElement):
         super(SeparateMonthAndDayElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
 
-    def getMonth(self):
-        return self._month
 
-    
-    def getMonthName(self):
-        return self._monthName
-
-    
-    def getDay(self):
-        return self._day
-
-
-    def draw3(self, drawer, resources, state):
+    def draw4(self, drawer, resources, state, twoDigitsMonth=False, twoDigitsDay=False):
         assert(type(resources) == list)
         monthAndDay = self._parent
 
         if self.getMonth():
-            self.getMonth().draw4(drawer, resources, state.getTime().month, 2 if monthAndDay.getTwoDigitsMonth() else 1)
+            self.getMonth().draw4(drawer, resources, state.getTime().month, 2 if twoDigitsMonth else 1)
         if self.getMonthName():
             self.getMonthName().draw3(drawer, resources, state.getTime().month-1)
         if self.getDay():
-            self.getDay().draw4(drawer, resources, state.getTime().day, 2 if monthAndDay.getTwoDigitsDay() else 1)
+            self.getDay().draw4(drawer, resources, state.getTime().day, 2 if twoDigitsDay else 1)
 
 
     def createChildForParameter(self, parameter):
