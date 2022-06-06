@@ -46,12 +46,12 @@ class TimeElement(ContainerElement):
         if self._sunriseHours:
             self._sunriseHours.draw4(drawer, images, state.getSunrise().hour, 2 )        
         if self._sunriseMinutes:
-            self._sunriseMinutes.draw4(drawer, images, state.getSunrise().minutes, 2 )
+            self._sunriseMinutes.draw4(drawer, images, state.getSunrise().minute, 2 )
             
         if self._sunsetHours:
             self._sunsetHours.draw4(drawer, images, state.getSunset().hour, 2 )        
         if self._sunsetMinutes:
-            self._sunsetMinutes.draw4(drawer, images, state.getSunset().minutes, 2 )
+            self._sunsetMinutes.draw4(drawer, images, state.getSunset().minute, 2 )
 
 
     def createChildForParameter(self, parameter):

@@ -1,10 +1,11 @@
-﻿from watchFaceParser.elements.basicElements.number import Number
+﻿from watchFaceParser.elements.basicElements.circleScale import CircleScale
+from watchFaceParser.elements.basicElements.number import Number
 
 class BatteryNumber:
     definitions = {
         1: { 'Name': 'Number', 'Type': Number},
-        2: { 'Name': 'SuffixImageIndex', 'Type': 'long?'},
+        2: { 'Name': 'Circle', 'Type': CircleScale},
         3: { 'Name': 'Unknown3', 'Type': 'long?'},
-        4: { 'Name': 'IconImageIndex', 'Type': 'long?'},
+        4: { 'Name': 'SuffixImageIndex', 'Type': 'long?'},
     }
 

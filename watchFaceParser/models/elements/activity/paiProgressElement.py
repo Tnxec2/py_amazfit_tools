@@ -9,7 +9,6 @@ class PaiProgressElement(ContainerElement):
         super(PaiProgressElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
     def draw3(self, drawer, images, state):
-
         if self._circle:
             self._circle.draw4(drawer, images, state.getPai(), 100)
 

@@ -11,7 +11,6 @@ class DistanceProgressElement(ContainerElement):
     def draw3(self, drawer, images, state):
         if self._icon:
             self._icon.draw4(drawer, images, state.getDistance(), 4000)
-
         if self._circle:
             self._circle.draw4(drawer, images, state.getDistance(), 4000)
 

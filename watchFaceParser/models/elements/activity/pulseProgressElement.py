@@ -10,6 +10,7 @@ class PulseStatusElement(ContainerElement):
         self._image4 = None
         self._image5 = None
         self._image6 = None
+        self._circle = None
         super(PulseStatusElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
     def draw3(self, drawer, resources, state):
@@ -33,6 +34,7 @@ class PulseStatusElement(ContainerElement):
         else:
             if self._image6:
                 self._image6.draw2(drawer, resources)
+                
         if self._circle:
             self._circle.draw4(drawer, resources, state.getPulse(), 220)
 

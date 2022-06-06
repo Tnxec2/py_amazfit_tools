@@ -24,17 +24,17 @@ class WatchFace(ContainerElement):
     def draw3(self, drawer, images, state):
         if self._background:
             self._background.draw3(drawer, images, state)
-            
-        if self._stepsProgress:
-            self._stepsProgress.draw3(drawer, images, state)
-        if self._caloriesProgress:
-            self._caloriesProgress.draw3(drawer, images, state)
+        
         if self._pulseStatus:
             self._pulseStatus.draw3(drawer, images, state)
         if self._paiProgress:
             self._paiProgress.draw3(drawer, images, state)
         if self._distanceProgress:
             self._distanceProgress.draw3(drawer, images, state)
+        if self._stepsProgress:
+            self._stepsProgress.draw3(drawer, images, state)
+        if self._caloriesProgress:
+             self._caloriesProgress.draw3(drawer, images, state)
 
         if self._activity:
             self._activity.draw3(drawer, images, state)
@@ -100,7 +100,7 @@ class WatchFace(ContainerElement):
             self._analogDial = AnalogDialElement(parameter)
             return self._analogDial
         elif parameterId == 13: # Pulse Status
-            from watchFaceParser.models.elements.activity.pulseStatusElement import PulseStatusElement
+            from watchFaceParser.models.elements.activity.pulseProgressElement import PulseStatusElement
             self._pulseStatus = PulseStatusElement(parameter)
             return self._pulseStatus
         elif parameterId == 15: # Shortcuts?
