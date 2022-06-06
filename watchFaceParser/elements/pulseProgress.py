@@ -4,7 +4,7 @@ from watchFaceParser.elements.basicElements.imageSet import ImageSet
 from watchFaceParser.elements.basicElements.iconSet import IconSet
 from watchFaceParser.elements.basicElements.linearIconSet import LinearIconSet
 
-class PulseStatus:
+class PulseProgress:
     definitions = {
         1: { 'Name': 'Image1', 'Type': Image},
         2: { 'Name': 'Image2', 'Type': Image},
@@ -12,6 +12,7 @@ class PulseStatus:
         4: { 'Name': 'Image4', 'Type': Image},
         5: { 'Name': 'Image5', 'Type': Image},
         6: { 'Name': 'Image6', 'Type': Image},
+        7: { 'Name': 'Circle', 'Type': CircleScale},
 
     }
 

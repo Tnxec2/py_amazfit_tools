@@ -51,6 +51,7 @@ class CircularProgressElement(CoordinatesElement):
             value = total
         sectorAngle = int(1.0 * (self.getEndAngle() - self.getStartAngle()) * value / total)
 
+        print(value, total, sectorAngle)
         from PIL import ImageDraw
         d = ImageDraw.Draw(drawer) # draw context
         radius = self.getRadiusX() + int(self.getWidth() / 2) # patch for PIL arc

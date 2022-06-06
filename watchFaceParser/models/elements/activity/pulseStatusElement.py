@@ -33,7 +33,8 @@ class PulseStatusElement(ContainerElement):
         else:
             if self._image6:
                 self._image6.draw2(drawer, resources)
-
+        if self._circle:
+            self._circle.draw4(drawer, resources, state.getPulse(), 220)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
@@ -61,5 +62,9 @@ class PulseStatusElement(ContainerElement):
             from watchFaceParser.models.elements.common.imageElement import ImageElement
             self._image6 = ImageElement(parameter = parameter, parent = self, name = 'Image6')
             return self._image6
+        elif parameterId == 7:
+            from watchFaceParser.models.elements.common.circularProgressElement import CircularProgressElement
+            self._circle = CircularProgressElement(parameter = parameter, parent = self, name = 'Circle')
+            return self._circle
         else:
             return super(PulseStatusElement, self).createChildForParameter(parameter)

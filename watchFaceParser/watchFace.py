@@ -3,7 +3,7 @@ from watchFaceParser.elements.background import Background
 from watchFaceParser.elements.caloriesProgress import CaloriesProgress
 from watchFaceParser.elements.paiProgress import PaiProgress
 from watchFaceParser.elements.distanceProgress import DistanceProgress
-from watchFaceParser.elements.pulseStatus import PulseStatus
+from watchFaceParser.elements.pulseProgress import PulseProgress
 from watchFaceParser.elements.shortcutElements.shortcuts import Shortcuts
 from watchFaceParser.elements.time import Time
 from watchFaceParser.elements.activity import Activity
@@ -28,7 +28,7 @@ class WatchFace:
         8: { 'Name': 'Status', 'Type': Status},
         9: { 'Name': 'Battery', 'Type': Battery},
         10: { 'Name': 'AnalogDialFace', 'Type': AnalogDialFace},
-        13: { 'Name': 'PulseStatus', 'Type': PulseStatus}, # zepp 6T9UoXZxYRma9lv9DZH0infCu269fAck4EF6DPUw
+        13: { 'Name': 'PulseProgress', 'Type': PulseProgress}, # zepp 6T9UoXZxYRma9lv9DZH0infCu269fAck4EF6DPUw
         14: { 'Name': 'Unknown14', 'Type': 'long?'}, # TODO: zepp 6EKQ2lOS3HFKbK4RJOEV4sgGbmOKqZrDFTinZdLe
         15: { 'Name': 'Shortcuts', 'Type': Shortcuts}, # TODO: zepp 2UTgO1V4APZpnGAvWcP50ca3wODjloDYbeqZ6i9J
         16: { 'Name': 'WeekdayIcon', 'Type': WeekdayStatus}, # zepp U8tlMNRdHSjVK44n55Hj6fp41AEW3jD3FXPVWbqq
