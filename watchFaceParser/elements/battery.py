@@ -11,7 +11,7 @@ class Battery:
         1: { 'Name': 'Text', 'Type': BatteryNumber},
         2: { 'Name': 'Icon', 'Type': ImageSet}, 
         3: { 'Name': 'Scale', 'Type': IconSet}, 
-        4: { 'Name': 'Cirlce', 'Type': CircleScale}, 
+        4: { 'Name': 'Circle', 'Type': CircleScale}, 
         5: { 'Name': 'Unknown5', 'Type': 'long?'}, 
         6: { 'Name': 'Unknown6', 'Type': 'long?'}, 
     }
