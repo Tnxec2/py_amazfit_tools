@@ -19,6 +19,7 @@ class WatchFace(ContainerElement):
         self._caloriesProgress = None
         self._distanceProgress = None
         self._paiProgress = None
+        self._pai = None
         super(WatchFace, self).__init__(parameters, parameter = None, parent = None, name = '')
 
     def draw3(self, drawer, images, state):
@@ -38,6 +39,8 @@ class WatchFace(ContainerElement):
 
         if self._activity:
             self._activity.draw3(drawer, images, state)
+        if self._pai:
+            self._pai.draw3(drawer, images, state)
         if self._activityAlt:
             self._activityAlt.draw3(drawer, images, state)
 
@@ -117,6 +120,10 @@ class WatchFace(ContainerElement):
             from watchFaceParser.models.elements.dateExtElement import DateExtendedElement
             self._dateext = DateExtendedElement(parameter)
             return self._dateext
+        elif parameterId == 19: # PAI
+            from watchFaceParser.models.elements.activity.paiElement import PaiElement
+            self._pai = PaiElement(parameter)
+            return self._pai
         elif parameterId == 20: # ActivityAlt
             from watchFaceParser.models.elements.activityAltElement import ActivityAltElement
             self._activityAlt = ActivityAltElement(parameter)

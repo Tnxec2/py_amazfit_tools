@@ -5,11 +5,13 @@ from watchFaceParser.models.elements.basic.compositeElement import CompositeElem
 class PulseElement(CompositeElement):
     def __init__(self, parameter, parent, name = None):
         self._number = None
+        self._suffixImageIndex = None
         super(PulseElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
     def draw3(self, drawer, resources, state):
         images = self._number.getImagesForNumber(resources, state.getPulse())
-
+        if self._suffixImageIndex:
+            images.append(resources[self._suffixImageIndex])
         from watchFaceParser.helpers.drawerHelper import DrawerHelper
         DrawerHelper.drawImages(drawer, images, self._number.getSpacing(), self._number.getAlignment(), self._number.getBox())
 
@@ -20,5 +22,9 @@ class PulseElement(CompositeElement):
             from watchFaceParser.models.elements.common.numberElement import NumberElement
             self._number = NumberElement(parameter, self, 'Number')
             return self._number
+        elif parameterId == 2:
+            from watchFaceParser.models.elements.basic.valueElement import ValueElement
+            self._suffixImageIndex = parameter.getValue()
+            return ValueElement(parameter, self, 'SuffixImageIndex')
         else:
             super(PulseElement, self).createChildForParameter(parameter)

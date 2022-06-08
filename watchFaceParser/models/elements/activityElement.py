@@ -10,9 +10,7 @@ class ActivityElement(ContainerElement):
         self._distance = None
         self._pulse = None
         self._calories = None
-        self._pai = None
-        self._starImage = None
-        self._circleRange = None
+
         super(ActivityElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
 
@@ -34,14 +32,6 @@ class ActivityElement(ContainerElement):
 
     def getCalories(self):
         return self._calories
-
-
-    def getStarImage(self):
-        return self._starImage
-
-
-    def getCircleRange(self):
-        return self._circleRange
 
     def draw3(self, drawer, images, state):
         return super().draw3(drawer, images, state)
@@ -68,10 +58,6 @@ class ActivityElement(ContainerElement):
             from watchFaceParser.models.elements.activity.distanceElement import DistanceElement
             self._distance = DistanceElement(parameter = parameter, parent = self, name = '?DistanceElement?')
             return self._distance
-        elif parameterId == 6:
-            from watchFaceParser.models.elements.activity.paiElement import PaiElement
-            self._pai = PaiElement(parameter = parameter, parent = self, name = '?PAI?')
-            return self._pai
         else:
             return super(ActivityElement, self).createChildForParameter(parameter)
 

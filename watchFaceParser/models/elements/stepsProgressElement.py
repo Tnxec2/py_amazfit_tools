@@ -15,7 +15,7 @@ class StepsProgressElement(ContainerElement):
             if state.getSteps() >= state.getGoal():
                 self._goalimage.draw3(drawer, images, state)
         if self._linear:
-            self._linear.draw3(drawer, images, state)
+            self._linear.draw4(drawer, images, state.getSteps(), state.getGoal())
         if self._gauge:
             self._gauge.draw3(drawer, images, state)
         if self._circle:
@@ -28,8 +28,8 @@ class StepsProgressElement(ContainerElement):
             self._goalimage = ImageElement(parameter = parameter, parent = self, name = 'GoalImage')
             return self._goalimage
         elif parameterId == 2:
-            from watchFaceParser.models.elements.goalProgress.linearGoalProgressElement import LinearGoalProgressElement
-            self._linear = LinearGoalProgressElement(parameter = parameter, parent = self, name = 'Linear')
+            from watchFaceParser.models.elements.common.iconSetElement import IconSetElement
+            self._linear = IconSetElement(parameter = parameter, parent = self, name = 'Linear')
             return self._linear
         elif parameterId == 3:
             from watchFaceParser.models.elements.goalProgress.stepGaugeElement import StepGaugeElement

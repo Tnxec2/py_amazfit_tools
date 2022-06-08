@@ -22,6 +22,10 @@ class IconSetElement(CompositeElement):
         return self._y or 0
 
 
+    def draw4(self, drawer, resources, value, total):
+        index = int(value / ( total / self._imagesCount))
+        self.draw3(drawer, resources, index)
+
     def draw3(self, drawer, resources, index):
         assert(type(resources) == list)
         assert(type(index) == int)
@@ -34,15 +38,15 @@ class IconSetElement(CompositeElement):
 
 
     def createChildForParameter(self, parameter):
-        if parameter.getId() == 1:
-            self._imagesCount = parameter.getValue()
+        if parameter.getId() == 3:
+            self._imageIndex = parameter.getValue()
             from watchFaceParser.models.elements.basic.valueElement import ValueElement
             return ValueElement(parameter, self, 'StartImageIndex')
-        elif parameter.getId() == 2:
+        elif parameter.getId() == 1:
             self._x = parameter.getValue()
             from watchFaceParser.models.elements.basic.valueElement import ValueElement
             return ValueElement(parameter, self, 'X')
-        elif parameter.getId() == 3:
+        elif parameter.getId() == 2:
             self._y = parameter.getValue()
             from watchFaceParser.models.elements.basic.valueElement import ValueElement
             return ValueElement(parameter, self, 'Y')

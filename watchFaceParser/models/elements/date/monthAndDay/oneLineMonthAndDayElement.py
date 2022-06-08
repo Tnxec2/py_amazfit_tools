@@ -11,15 +11,14 @@ class OneLineMonthAndDayElement(CompositeElement):
         super(OneLineMonthAndDayElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
 
-    def draw4(self, drawer, resources, state):
+    def draw4(self, drawer, resources, state, twoDigitsMonth=False, twoDigitsDay=False):
         assert(type(resources) == list)
-        monthAndDay = self._parent
 
-        images = self._number.getImagesForNumber(resources, state.getTime().month, 2 if monthAndDay.getTwoDigitsMonth() else 1)
+        images = self._number.getImagesForNumber(resources, state.getTime().month, 2 if twoDigitsMonth else 1)
 
         if (self._delimiterImageIndex):
             images.append(resources[self._delimiterImageIndex])
-        for image in self._number.getImagesForNumber(resources, state.getTime().day, 2 if monthAndDay.getTwoDigitsDay() else 1):
+        for image in self._number.getImagesForNumber(resources, state.getTime().day, 2 if twoDigitsDay else 1):
             images.append(image)
 
         from watchFaceParser.helpers.drawerHelper import DrawerHelper
@@ -34,7 +33,7 @@ class OneLineMonthAndDayElement(CompositeElement):
             return self._number
         elif parameterId == 2:
             from watchFaceParser.models.elements.basic.valueElement import ValueElement
-            self._delimiterImageIndex = ValueElement(parameter = parameter, parent = self, name = 'WeekDay')
-            return self._delimiterImageIndex
+            self._delimiterImageIndex = parameter.getValue() 
+            return ValueElement(parameter = parameter, parent = self, name = 'DelimiterImageIndex')
         else:
             return super(OneLineMonthAndDayElement, self).createChildForParameter(parameter)

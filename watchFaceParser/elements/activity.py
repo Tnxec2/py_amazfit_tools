@@ -8,6 +8,5 @@ class Activity:
         3: { 'Name': 'Calories', 'Type': FormattedNumber},
         4: { 'Name': 'Pulse', 'Type': PulseFormattedNumber},
         5: { 'Name': 'Distance', 'Type': FormattedNumber},
-        6: { 'Name': 'PAI', 'Type': FormattedNumber},
     }
 

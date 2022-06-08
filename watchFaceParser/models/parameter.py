@@ -104,7 +104,7 @@ class Parameter:
             floatValArr = struct.pack('<f', value)  #little endian 
             stream.write(floatValArr)
             hex_string = "".join("%02x " % b for b in floatValArr)
-            logging.info(Parameter.traceWithOffset(f"{self.getId()} ({rawId:2X}): %8.2f ({hex_string}) floatval" % value, traceOffset)) 
+            logging.info(Parameter.traceWithOffset(f"{self.getId()} ({rawId:2X}): %8.2f ({hex_string}) floatval" % value, traceOffset) + f"{size} bytes") 
             return size + len(floatValArr)
         elif self.hasFlags():
     #        print ("EDDI %02x %x %x"% (rawId,flags,(ParameterFlags.Unknown | ParameterFlags.Unknown2| ParameterFlags.hasChildren)))
@@ -179,7 +179,7 @@ class Parameter:
         #rawId = Parameter.readByte(fileStream, traceOffset)
         rawId = Parameter.readValue(fileStream, traceOffset) 
         _id = (rawId & 0xf8) >> 3
- #       print ("%03x" % rawId, rawId & 0x07)
+#        print ("%03x" % rawId, rawId & 0x07)
         flags = ParameterFlags(rawId & 0x07)
         #logging.info("FLAGS %x" % (rawId & 0x07))
 
