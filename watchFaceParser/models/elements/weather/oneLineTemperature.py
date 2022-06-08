@@ -14,7 +14,7 @@ class OneLineElement(ContainerElement):
 
     def draw3(self, drawer, resources, state):
         assert(type(resources) == list)
-        
+
         if self._number:
             images = []
             min = state.getCurrentTemperature()-7
@@ -42,8 +42,8 @@ class OneLineElement(ContainerElement):
         parameterId = parameter.getId()
         if parameterId == 1:
             from watchFaceParser.models.elements.common.numberElement import NumberElement
-            self._customicon = NumberElement(parameter = parameter, parent = self, name = 'Number')
-            return self._weekDay
+            self._number = NumberElement(parameter = parameter, parent = self, name = 'Number')
+            return self._number
         elif parameterId == 2:
             self._minus_image_index = parameter.getValue()
             return ValueElement(parameter, self, 'MinusSignImageIndex')
