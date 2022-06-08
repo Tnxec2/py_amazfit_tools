@@ -7,12 +7,12 @@ if __name__ == '__main__':
     import sys
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dither64', action='store_true', help='convert images to 64 RGB with dithering')
+    parser.add_argument('--nodither', action='store_true', help='convert images to 64 RGB with dithering')
     parser.add_argument('filename', nargs='+', help='''watchface.bin - unpacks watchface images and config
     watchface.json - packs config and referenced images to bin file''')
     args = parser.parse_args()
 
-    Config.setDither(args.dither64)
+    Config.setDither(args.nodither)
 
     for inputFileName in args.filename:
         isDirectory = os.path.isdir(inputFileName)
@@ -29,6 +29,8 @@ if __name__ == '__main__':
             if inputFileExtension == '.bin':
                 program.Parser.unpackWatchFace(inputFileName)
             elif inputFileExtension == '.json':
+                if Config.isDither(): 
+                    print(f'Image are to 8 Bit color coverted. Set --nodither argument to do not dither images.')
                 program.Parser.packWatchFace(inputFileName)
             else:
                 print("The app doesn't support file with extension %s." % (inputFileExtension, ))

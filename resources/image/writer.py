@@ -5,8 +5,7 @@ import math
 
 
 from resources.image.bitwriter import BitWriter
-from resources.image.color import Color
-
+from watchFaceParser.models.color import Color
 
 class Writer:
     signature = bytearray(b'BMd\x00')
@@ -21,14 +20,15 @@ class Writer:
     def write(self, image):
         
         from watchFaceParser.config import Config
-        if Config.isDither:
+
+        if Config.isDither():
             from PIL import Image, features
             if features.check_feature(feature="libimagequant"):
                 logging.debug("Dither image with libimagequant method")
-                self._image = image.quantize(colors=64, method=Image.LIBIMAGEQUANT, dither=Image.FLOYDSTEINBERG).convert('RGBA')
+                self._image = image.quantize(colors=8, method=Image.LIBIMAGEQUANT, dither=Image.FLOYDSTEINBERG).convert('RGBA')
             else:
                 logging.debug("Dither image with default method")
-                self._image = image.quantize(colors=64, dither=Image.FLOYDSTEINBERG).convert('RGBA')
+                self._image = image.quantize(colors=8, dither=Image.FLOYDSTEINBERG).convert('RGBA')
         else: 
             self._image = image.convert('RGBA')
 
@@ -75,29 +75,28 @@ class Writer:
 
         startIndex = 1 if (self._transparency != 0) else 0
 
-        # palleteColors = len(self._palleteColorsArray)
-        # for i in range(startIndex, palleteColors - 1):
-        #     minColor = self.toInt(self._palleteColorsArray[i])
-        #     minIndex = i
-        #     for j in range(i + 1, palleteColors):
-        #         pixel_color = self.toInt(self._palleteColorsArray[j])
-        #         if (pixel_color >= minColor):
-        #             continue
+        palleteColors = len(self._palleteColorsArray)
+        for i in range(startIndex, palleteColors - 1):
+            minColor = Color.toInt(self._palleteColorsArray[i])
+            minIndex = i
+            for j in range(i + 1, palleteColors):
+                pixel_color = Color.toInt(self._palleteColorsArray[j])
+                if (pixel_color >= minColor):
+                    continue
 
-        #         minColor = pixel_color
-        #         minIndex = j
+                minColor = pixel_color
+                minIndex = j
 
-        #     if (minIndex == i):
-        #         continue
+            if (minIndex == i):
+                continue
 
-        #     tmp = self._palleteColorsArray[i]
-        #     self._palleteColorsArray[i] = self._palleteColorsArray[minIndex]
-        #     self._palleteColorsArray[minIndex] = tmp
+            tmp = self._palleteColorsArray[i]
+            self._palleteColorsArray[i] = self._palleteColorsArray[minIndex]
+            self._palleteColorsArray[minIndex] = tmp
         
         self._paletteColors = len(self._palleteColorsArray)
         self._bitsPerPixel = math.ceil(math.log(self._paletteColors, 2))
-        sortedPallete = sorted(self._palleteColorsArray)
-        self._palleteColorsArray = sortedPallete
+        
 
     def writeHeader(self):
         logging.debug("Writing image header...")

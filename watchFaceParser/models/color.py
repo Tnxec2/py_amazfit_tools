@@ -17,3 +17,9 @@ class Color:
         v = int(strValue, 16)
         return v
 
+    @staticmethod
+    def toInt(pixel_color):
+        (r, g, b, a) = pixel_color
+        strValue = (f"0x{r:02X}{g:02X}{b:02X}{a:02X}")
+        v = int(strValue, 16)
+        return v

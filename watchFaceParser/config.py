@@ -1,7 +1,7 @@
 class Config:
     _image_size = 176
     _preview_size = 110
-    _dither = False
+    _dither = True
 
     @staticmethod
     def getImageSize():
@@ -19,8 +19,8 @@ class Config:
         return Config._preview_size
 
     @staticmethod
-    def setDither(dither):
-        Config._dither = dither
+    def setDither(nodither):
+        Config._dither = False if nodither else True
 
     @staticmethod
     def isDither():
