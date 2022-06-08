@@ -16,12 +16,12 @@ class SeparateMonthAndDayElement(CompositeElement):
         assert(type(resources) == list)
         monthAndDay = self._parent
 
-        if self.getMonth():
-            self.getMonth().draw4(drawer, resources, state.getTime().month, 2 if twoDigitsMonth else 1)
-        if self.getMonthName():
-            self.getMonthName().draw3(drawer, resources, state.getTime().month-1)
-        if self.getDay():
-            self.getDay().draw4(drawer, resources, state.getTime().day, 2 if twoDigitsDay else 1)
+        if self._month:
+            self._month.draw4(drawer, resources, state.getTime().month, 2 if twoDigitsMonth else 1)
+        if self._monthName:
+            self._monthName.draw3(drawer, resources, state.getTime().month-1)
+        if self._day:
+            self._day.draw4(drawer, resources, state.getTime().day, 2 if twoDigitsDay else 1)
 
 
     def createChildForParameter(self, parameter):

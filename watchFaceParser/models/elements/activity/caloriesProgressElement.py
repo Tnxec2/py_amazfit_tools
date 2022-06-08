@@ -14,7 +14,6 @@ class CaloriesProgressElement(ContainerElement):
             self._icon.draw4(drawer, images, state.getCalories(), 200)
 
         if self._circle:
-            print(state.getCalories())
             self._circle.draw4(drawer, images, state.getCalories(), 200)
 
     def createChildForParameter(self, parameter):
