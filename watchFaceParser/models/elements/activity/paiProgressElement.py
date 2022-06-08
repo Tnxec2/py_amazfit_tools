@@ -10,7 +10,7 @@ class PaiProgressElement(ContainerElement):
 
     def draw3(self, drawer, images, state):
         if self._circle:
-            self._circle.draw4(drawer, images, state.getPai(), 100)
+            self._circle.draw4(drawer, images, state.getPAI(), 100)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
