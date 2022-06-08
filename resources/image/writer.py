@@ -25,10 +25,10 @@ class Writer:
             from PIL import Image, features
             if features.check_feature(feature="libimagequant"):
                 logging.debug("Dither image with libimagequant method")
-                self._image = image.quantize(colors=8, method=Image.LIBIMAGEQUANT, dither=Image.FLOYDSTEINBERG).convert('RGBA')
+                self._image = image.quantize(colors=16, method=Image.LIBIMAGEQUANT, dither=Image.FLOYDSTEINBERG).convert('RGBA')
             else:
                 logging.debug("Dither image with default method")
-                self._image = image.quantize(colors=8, dither=Image.FLOYDSTEINBERG).convert('RGBA')
+                self._image = image.quantize(colors=16, dither=Image.FLOYDSTEINBERG).convert('RGBA')
         else: 
             self._image = image.convert('RGBA')
 
