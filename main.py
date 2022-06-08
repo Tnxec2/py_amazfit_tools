@@ -30,7 +30,7 @@ if __name__ == '__main__':
                 program.Parser.unpackWatchFace(inputFileName)
             elif inputFileExtension == '.json':
                 if Config.isDither(): 
-                    print(f'Image are to 16 Bit color coverted. Set --nodither argument to do not dither images.')
+                    print(f'Image are to {Config._ditherDepth} Bit color coverted. Set --nodither argument to do not dither images.')
                 program.Parser.packWatchFace(inputFileName)
             else:
                 print("The app doesn't support file with extension %s." % (inputFileExtension, ))

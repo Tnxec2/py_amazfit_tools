@@ -2,6 +2,7 @@ class Config:
     _image_size = 176
     _preview_size = 110
     _dither = True
+    _ditherDepth = 16
 
     @staticmethod
     def getImageSize():
