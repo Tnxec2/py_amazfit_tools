@@ -7,6 +7,7 @@ class SeparateMonthAndDayElement(CompositeElement):
     def __init__(self, parameter, parent, name = None):
         self._month = None
         self._monthName = None
+        self._monthAsWord = None
         self._day = None
         super(SeparateMonthAndDayElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
@@ -20,6 +21,8 @@ class SeparateMonthAndDayElement(CompositeElement):
             self._month.draw4(drawer, resources, state.getTime().month, 2 if twoDigitsMonth else 1)
         if self._monthName:
             self._monthName.draw3(drawer, resources, state.getTime().month-1)
+        if self._monthAsWord:
+            self._monthAsWord.draw3(drawer, resources, state.getTime().month-1)
         if self._day:
             self._day.draw4(drawer, resources, state.getTime().day, 2 if twoDigitsDay else 1)
 
@@ -38,5 +41,9 @@ class SeparateMonthAndDayElement(CompositeElement):
             from watchFaceParser.models.elements.common.numberElement import NumberElement
             self._day = NumberElement(parameter = parameter, parent = self, name = 'Day')
             return self._day
+        elif parameterId == 4:
+            from watchFaceParser.models.elements.common.imageSetElement import ImageSetElement
+            self._monthAsWord = ImageSetElement(parameter = parameter, parent = self, name = 'MonthAsWord')
+            return self._monthAsWord
         else:
             return super(SeparateMonthAndDayElement, self).createChildForParameter(parameter)
