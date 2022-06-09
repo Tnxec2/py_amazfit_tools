@@ -200,6 +200,7 @@ class Parser:
                 duration=1000,
                 loop=0)
         except Exception as e:
+            print("Preview generate error. Look in logs.")
             import traceback
             #traceback.print_stack()
             logging.exception(e)
