@@ -59,7 +59,4 @@ class DrawerHelper:
 
             imageWidth = image.getBitmap().size[0]
             x += imageWidth + int(spacing)
-            if alignmentFlag.hasFlag(TextAlignment.Right):
-                y -= verticaloffset
-            else:
-                y += verticaloffset
+            y += verticaloffset
