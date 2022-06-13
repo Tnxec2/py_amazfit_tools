@@ -10,6 +10,6 @@ class PAI:
         5: { 'Name': 'NumberNormal', 'Type': Number},
         6: { 'Name': 'NumberHigh', 'Type': Number},
         7: { 'Name': 'NoDataImage', 'Type': Image},
-        11: { 'Name': 'NumberGeneric', 'Type': Number},
+        11: { 'Name': 'NumberGeneral', 'Type': Number},
     }
 
