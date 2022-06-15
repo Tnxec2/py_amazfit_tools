@@ -1,4 +1,8 @@
-from watchFaceParser.models.elements.watchFace import WatchFace
+from watchFaceParser.config import Config
+if Config.isOldBip:
+    from watchFaceParser.models.elements.watchFaceOldBip import WatchFace
+else:
+    from watchFaceParser.models.elements.watchFace import WatchFace
 from watchFaceParser.config import Config
 
 class PreviewGenerator:

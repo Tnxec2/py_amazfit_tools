@@ -8,11 +8,13 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('--nodither', action='store_true', help='convert images to 64 RGB with dithering')
+    parser.add_argument('--old', action='store_true', help='unpack old bip watchface bin')
     parser.add_argument('filename', nargs='+', help='''watchface.bin - unpacks watchface images and config
     watchface.json - packs config and referenced images to bin file''')
     args = parser.parse_args()
 
     Config.setDither(args.nodither)
+    Config.setOldBip(args.old)
 
     for inputFileName in args.filename:
         isDirectory = os.path.isdir(inputFileName)

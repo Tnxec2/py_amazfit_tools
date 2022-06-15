@@ -2,6 +2,7 @@ class Config:
     _image_size = 176
     _preview_size = 108
     _dither = True
+    _oldBip = False
     _ditherDepth = 16
 
     @staticmethod
@@ -24,5 +25,12 @@ class Config:
         Config._dither = False if nodither else True
 
     @staticmethod
+    def setOldBip(old):
+        Config._oldBip = True if old else False
+
+    @staticmethod
     def isDither():
         return Config._dither
+    @staticmethod
+    def isOldBip():
+        return Config._oldBip

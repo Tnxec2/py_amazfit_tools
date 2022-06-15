@@ -2,8 +2,6 @@ import os.path
 import logging
 import json
 import random
-from watchFaceParser.models.weatherCondition import WeatherCondition
-
 
 from watchFaceParser.reader import Reader
 from watchFaceParser.writer import Writer
@@ -159,7 +157,11 @@ class Parser:
     def parseResources(reader):
         logging.debug("Parsing parameters...")
         try:
-            return ParametersConverter.parse(WatchFace, reader.getParameters())
+            if Config.isOldBip:
+                from watchFaceParser.watchFaceOldBip import WatchFaceOldBip
+                return ParametersConverter.parse(WatchFaceOldBip, reader.getParameters())
+            else:
+                return ParametersConverter.parse(WatchFace, reader.getParameters())
         except Exception as e:
             logging.fatal(e, exc_info=True)
             return None
