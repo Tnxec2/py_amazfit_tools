@@ -19,6 +19,8 @@ class LinearIconSetElement(CompositeElement):
             end = len(self._segments) 
         
         for i in range(end):
+            if self._startImageIndex+i >= len(resources):    # BipS draw only exist images
+                return
             image = resources[self._startImageIndex+i]
             x = self._segments[i].getX()
             y = self._segments[i].getY()
