@@ -157,10 +157,11 @@ class Parser:
     def parseResources(reader):
         logging.debug("Parsing parameters...")
         try:
-            if Config.isOldBip:
+            if Config.isOldBip():
                 from watchFaceParser.watchFaceOldBip import WatchFaceOldBip
                 return ParametersConverter.parse(WatchFaceOldBip, reader.getParameters())
             else:
+                from watchFaceParser.watchFace import WatchFace
                 return ParametersConverter.parse(WatchFace, reader.getParameters())
         except Exception as e:
             logging.fatal(e, exc_info=True)

@@ -26,7 +26,7 @@ class Config:
 
     @staticmethod
     def setOldBip(old):
-        Config._oldBip = True if old else False
+        Config._oldBip = old
 
     @staticmethod
     def isDither():

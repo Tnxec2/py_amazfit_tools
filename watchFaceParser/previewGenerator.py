@@ -1,5 +1,5 @@
 from watchFaceParser.config import Config
-if Config.isOldBip:
+if Config.isOldBip():
     from watchFaceParser.models.elements.watchFaceOldBip import WatchFace
 else:
     from watchFaceParser.models.elements.watchFace import WatchFace
