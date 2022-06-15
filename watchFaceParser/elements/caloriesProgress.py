@@ -6,7 +6,7 @@ from watchFaceParser.elements.basicElements.linearIconSet import LinearIconSet
 
 class CaloriesProgress:
     definitions = {
-        2: { 'Name': 'Icon', 'Type': ImageSet},
-        4: { 'Name': 'Circle', 'Type': CircleScale},
+        2: { 'Name': 'Icon', 'Type': ImageSet}, # zepp: ex5urh0a24zK8SgYzj80wOZ0cqB3TX8NIpPVYNHS
+        4: { 'Name': 'Circle', 'Type': CircleScale}, # zepp: Q45abXyTkaM6IFZdCsUwdseezHZhuZmi70i39r97
     }
 

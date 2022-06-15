@@ -37,7 +37,7 @@ class WatchFace:
         17: { 'Name': 'DistanceProgress', 'Type': DistanceProgress}, # zepp 6T9UoXZxYRma9lv9DZH0infCu269fAck4EF6DPUw
         18: { 'Name': 'DateExtended', 'Type': DateExtended}, # zepp 6EKQ2lOS3HFKbK4RJOEV4sgGbmOKqZrDFTinZdLe
         19: { 'Name': 'PAI', 'Type': PAI}, # TODO: zepp iydgD8W5wmb7n3adhPSK9Dx0p3QLDexG3ZfKaxUo
-        20: { 'Name': 'ActivityAlt', 'Type': ActivityAlt}, # zepp eARIxYKjIn6MXyuIdwekruLgWHo4sieDJ9JllMdP
+        20: { 'Name': 'ActivityAlt', 'Type': ActivityAlt}, # zepp eARIxYKjIn6MXyuIdwekruLgWHo4sieDJ9JllMdPб, ex5urh0a24zK8SgYzj80wOZ0cqB3TX8NIpPVYNHS, sRJsTgan1VapqNNnujGVZfbMeyjlGawzwrZy7nFe
         21: { 'Name': 'CaloriesProgress', 'Type': CaloriesProgress}, # zepp 6T9UoXZxYRma9lv9DZH0infCu269fAck4EF6DPUw
         22: { 'Name': 'PaiProgress', 'Type': PaiProgress}, # TODO: check PAI or Pulse? zepp Dz9GUS6zjaJEJpsdNaKVdJieyELjKoSRf9VJOMi6
     }
