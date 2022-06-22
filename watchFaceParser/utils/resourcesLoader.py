@@ -1,10 +1,10 @@
 import logging
 
 from watchFaceParser.utils.elementsHelper import ElementsHelper
-
+from watchFaceParser.config import Config
 
 class ResourcesLoader:
-    # redundancy
+    # redundancy  
     @staticmethod
     def getValue(propertyInfo, serializable):
         propertyInfoName = propertyInfo['Name']
@@ -53,11 +53,16 @@ class ResourcesLoader:
             currentPath = str(_id) if path == None or path == '' else ''.join([path, '.', str(_id)])
 
             propertyInfo = properties[_id]
-            propertyType = propertyInfo['Type']
+            #propertyType = propertyInfo['Type']
+            if isinstance(propertyInfo['Type'],list):
+                propertyType = propertyInfo['Type'][0]
+            else:
+                propertyType = propertyInfo['Type']
             propertyValue = ResourcesLoader.getValue(propertyInfo, serializable) # propertyInfo.getValue(serializable, None)
 
-            imageIndexAttribute = ElementsHelper.getCustomAttributeFor('ImageIndex', propertyInfo)
+            imageIndexAttribute = ElementsHelper.getCustomAttributeFor('ImageIndex', propertyInfo) 
             imagesCountAttribute = ElementsHelper.getCustomAttributeFor('ImagesCount', propertyInfo)
+            logging.debug(f"INDEX {imageIndexAttribute,propertyInfo['Name']} '{propertyValue}'")
 
             if imagesCountAttribute != None and imageIndexAttribute != None:
                 raise IndexError(
@@ -70,6 +75,7 @@ class ResourcesLoader:
                     imageIndex = propertyValue
 
                     lastImageIndexValue = imageIndex
+ #                   print("INDEX",imageIndexAttribute,propertyInfo['Name'],propertyValue,imageIndex)
                     mappedIndex = self.loadImage(imageIndex)
                     propertyInfoName = propertyInfo['Name']
                     serializable[propertyInfoName] = mappedIndex
@@ -89,15 +95,68 @@ class ResourcesLoader:
                     for i in range(lastImageIndexValue + 1, lastImageIndexValue + imagesCount):
                         self.loadImage(i)
             else:
+                from watchFaceParser.elements.basicElements.coordinates import Coordinates
+                if lastImageIndexValue and isinstance(propertyValue,list) and propertyType == Coordinates:
+                    logging.debug(f"Coordinates: LastImageIndexValue: {lastImageIndexValue}, propertyType: {propertyType}, Len(propertyValue): {len(propertyValue)}, PropretyValue: {propertyValue}")
+                    for i in range(lastImageIndexValue+1, lastImageIndexValue+len(propertyValue)):
+                        self.loadImage(i)   
                 if imagesCountAttribute == None and imageIndexAttribute == None:
                     if propertyValue != None:
-                        self.process(propertyType, propertyValue, currentPath)
+                        if isinstance(propertyValue,list):
+                            for i in propertyValue:
+                                self.process(propertyType, i, currentPath)
+                        else:
+                            self.process(propertyType, propertyValue, currentPath)
                 else:
                     raise IndexError(
                         f"Property {propertyInfo} with type {propertyType} can't have ParameterImageIndexAttribute or ParameterImagesCountAttribute")
 
 
+    def loadImage_working(self, index):
+        assert(type(index) == int)
+        if index in self._mapping:
+            return self._mapping[index]
+
+        if index >= len(self._resources):
+            self._resources.extend([None ] * (index + 1 - len(self._resources)))
+        newImageIndex = index
+        #else:
+        #newImageIndex = len(self._resources)
+#        print (self._resources)
+ #       print ("xxINDEX",index, newImageIndex, len(self._resources))
+        logging.debug(f"Loading image {newImageIndex}...")
+        print(f"Loading image {newImageIndex}...")
+        from resources.imageLoader import ImageLoader
+        resource = ImageLoader.loadResourceForNumber(self._imagesDirectory, index)
+#        if len(self._resources) > index:
+#        print (len(self._resources))
+        self._resources[index] = resource
+ #       else:
+        #self._resources.append(resource)
+        self._mapping[index] = newImageIndex
+#        print (self._resources)
+        return newImageIndex
+
     def loadImage(self, index):
+        assert(type(index) == int)
+        if index in self._mapping:
+            return self._mapping[index]
+
+        logging.debug(f"Request image index {index}...")
+        newImageIndex = None
+
+        for i in range(len(self._resources),index+1): 
+            newImageIndex = i     
+            logging.debug(f"Loading image {newImageIndex}...")
+            #print(f"Loading image {newImageIndex}...")
+            from resources.imageLoader import ImageLoader
+            resource = ImageLoader.loadResourceForNumber(self._imagesDirectory, i )
+            self._resources.append(resource)
+            self._mapping[i ] = newImageIndex
+            #print ("XXXX",index,newImageIndex)
+        return newImageIndex
+ 
+    def loadImage_orig(self, index):
         assert(type(index) == int)
         if index in self._mapping:
             return self._mapping[index]
