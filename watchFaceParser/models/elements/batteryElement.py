@@ -8,7 +8,7 @@ class BatteryElement(ContainerElement):
         self._text = None
         self._percent = None
         self._scale = None
-        self._gauge = None
+        self._icon = None
         self._circle = None
         super(BatteryElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
@@ -18,15 +18,15 @@ class BatteryElement(ContainerElement):
         from watchFaceParser.models.elements.basic.valueElement import ValueElement
         if parameterId == 1:
             from watchFaceParser.models.elements.battery.batteryNumberElement import BatteryNumberElement
-            self._text = BatteryNumberElement(parameter = parameter, parent = self, name = '?_text?')
+            self._text = BatteryNumberElement(parameter = parameter, parent = self, name = 'Text')
             return self._text
         elif parameterId == 2:
-            from watchFaceParser.models.elements.battery.batteryGaugeElement import BatteryGaugeElement # temp.
-            self._gauge = BatteryGaugeElement(parameter = parameter, parent = self, name = '?Icon?')
-            return self._gauge
+            from watchFaceParser.models.elements.battery.batteryImageSetElement import BatteryImageSetElement # temp.
+            self._icon = BatteryImageSetElement(parameter = parameter, parent = self, name = 'Icon')
+            return self._icon
         elif parameterId == 3:
-            from watchFaceParser.models.elements.battery.batteryIconsetElement import BatteryIconSetElement
-            self._scale = BatteryIconSetElement(parameter = parameter, parent = self, name = 'Scale')
+            from watchFaceParser.models.elements.battery.batteryLinearIconsetElement import BatteryLinearIconSetElement
+            self._scale = BatteryLinearIconSetElement(parameter = parameter, parent = self, name = 'Scale')
             return self._scale
         elif parameterId == 4:
             from watchFaceParser.models.elements.battery.batteryCircleProgressElement import BatteryCircleProgressElement
