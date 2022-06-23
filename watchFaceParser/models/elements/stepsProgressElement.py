@@ -28,8 +28,8 @@ class StepsProgressElement(ContainerElement):
             self._goalimage = ImageElement(parameter = parameter, parent = self, name = 'GoalImage')
             return self._goalimage
         elif parameterId == 2:
-            from watchFaceParser.models.elements.common.iconSetElement import IconSetElement
-            self._linear = IconSetElement(parameter = parameter, parent = self, name = 'Linear')
+            from watchFaceParser.models.elements.common.imageSetElement import ImageSetElement
+            self._linear = ImageSetElement(parameter = parameter, parent = self, name = 'IconSet')
             return self._linear
         elif parameterId == 3:
             from watchFaceParser.models.elements.goalProgress.stepGaugeElement import StepGaugeElement
