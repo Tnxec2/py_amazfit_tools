@@ -5,7 +5,7 @@ from watchFaceParser.elements.basicElements.linearIconSet import LinearIconSet
 class StepsProgress:
     definitions = {
         1: { 'Name': 'GoalImage', 'Type': Image},
-        2: { 'Name': 'Linear', 'Type': LinearIconSet},
+        2: { 'Name': 'Gauge', 'Type': LinearIconSet},
         3: { 'Name': 'Circle', 'Type': CircleScale},
     }
 
