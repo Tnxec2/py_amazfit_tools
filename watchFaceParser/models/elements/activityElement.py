@@ -10,6 +10,7 @@ class ActivityElement(ContainerElement):
         self._distance = None
         self._pulse = None
         self._calories = None
+        self._stepPercentage = None
 
         super(ActivityElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
@@ -32,6 +33,9 @@ class ActivityElement(ContainerElement):
 
     def getCalories(self):
         return self._calories
+
+    def getStepPercentage(self):
+        return self._stepPercentage
 
     def draw3(self, drawer, images, state):
         return super().draw3(drawer, images, state)
@@ -58,6 +62,10 @@ class ActivityElement(ContainerElement):
             from watchFaceParser.models.elements.activity.distanceElement import DistanceElement
             self._distance = DistanceElement(parameter = parameter, parent = self, name = '?DistanceElement?')
             return self._distance
+        elif parameterId == 7:
+            from watchFaceParser.models.elements.activity.stepPercentageProgressElement import StepPercentageProgressElement
+            self._stepPercentage = StepPercentageProgressElement(parameter = parameter, parent = self, name = '?StepPercentageProgress?')
+            return self._stepPercentage
         else:
             return super(ActivityElement, self).createChildForParameter(parameter)
 

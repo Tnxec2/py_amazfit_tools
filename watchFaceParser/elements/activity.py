@@ -2,6 +2,8 @@ from watchFaceParser.elements.activityElements.caloriesFormattedNumber import Ca
 from watchFaceParser.elements.activityElements.distanceFormattedNumber import DistanceFormattedNumber
 from watchFaceParser.elements.activityElements.pulseFormattedNumber import PulseFormattedNumber
 from watchFaceParser.elements.activityElements.stepsFormattedNumber import StepsFormattedNumber
+from watchFaceParser.elements.activityElements.stepPercentageProgressFormattedNumber import StepPercentageProgressFormattedNumber
+from watchFaceParser.elements.activityElements.testUnknown6ActivityFormattedNumber import Unknown6ActivityFormattedNumber
 
 class Activity:
     definitions = {
@@ -10,5 +12,6 @@ class Activity:
         3: { 'Name': 'Calories', 'Type': CaloriesFormattedNumber},
         4: { 'Name': 'Pulse', 'Type': PulseFormattedNumber},
         5: { 'Name': 'Distance', 'Type': DistanceFormattedNumber},
+        7: { 'Name': 'StepPercentageProgress', 'Type': StepPercentageProgressFormattedNumber}, # zepp: kAFXMVWYNeBKAVr7Ubj5ExUCEEXP6k7vu3iSQqr4
     }
 
