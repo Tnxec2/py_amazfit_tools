@@ -10,7 +10,7 @@ class Header:
 
     def __init__(self, unknown, parametersSize):
         self.signature = Header.dialSignature
-        self.unknown = 345 # hard coding ?
+        self.unknown = max(unknown, 60) # minimum 60, otherwise wf will not displayed on BipS,  zepp: 1eLmhSAPUNmDIVKfhQygZj48wDdlcMtnZ332je9o
         self.parametersSize = parametersSize
 
 

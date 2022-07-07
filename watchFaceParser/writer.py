@@ -26,6 +26,7 @@ class Writer:
         for encodedParameterId in encodedParameters:
             encodedParameterLength = len(encodedParameters[encodedParameterId].getbuffer())
             maxEncodedParametersLength = max(maxEncodedParametersLength, encodedParameterLength)
+            logging.debug(f"encodedParameterLength: {encodedParameterLength}")
             parametersPositions.append(Parameter(encodedParameterId, [ Parameter(1, offset), Parameter(2, encodedParameterLength) ]))
             offset += encodedParameterLength
 
