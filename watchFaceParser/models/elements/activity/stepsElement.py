@@ -5,7 +5,7 @@ from watchFaceParser.models.elements.basic.compositeElement import CompositeElem
 class StepsElement(CompositeElement):
     def __init__(self, parameter, parent, name = None):
         self._step = None
-        self._suffixImageIndex = None
+        self._prefixImageIndex = None
 
         super(StepsElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
@@ -13,9 +13,12 @@ class StepsElement(CompositeElement):
         return self._step
 
     def draw3(self, drawer, resources, state):
-        images = self.getStep().getImagesForNumber(resources, state.getSteps())
-        if self._suffixImageIndex:
-            images.append(resources[self._suffixImageIndex])
+        images = []
+        if self._prefixImageIndex:
+            images.append(resources[self._prefixImageIndex])
+        for image in self._step.getImagesForNumber(resources, state.getSteps()):
+            images.append(image)
+
         from watchFaceParser.helpers.drawerHelper import DrawerHelper
         DrawerHelper.drawImages(drawer, images, self.getStep().getSpacing(), self.getStep().getAlignment(), self.getStep().getBox())
 
@@ -28,7 +31,7 @@ class StepsElement(CompositeElement):
             return self._step
         elif parameterId == 2:
             from watchFaceParser.models.elements.basic.valueElement import ValueElement
-            self._suffixImageIndex = parameter.getValue()
-            return ValueElement(parameter, self, 'SuffixImageIndex')
+            self._prefixImageIndex = parameter.getValue()
+            return ValueElement(parameter, self, 'PrefixImageIndex')
         else:
             super(StepsElement, self).createChildForParameter(parameter)
