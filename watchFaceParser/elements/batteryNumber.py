@@ -6,6 +6,6 @@ class BatteryNumber:
         1: { 'Name': 'Number', 'Type': Number},
         2: { 'Name': 'Circle', 'Type': CircleScale},
         3: { 'Name': 'Unknown3', 'Type': 'long?'},
-        4: { 'Name': 'SuffixImageIndex', 'Type': 'long?'},
+        4: { 'Name': 'SuffixImageIndex', 'Type': 'long'},
     }
 

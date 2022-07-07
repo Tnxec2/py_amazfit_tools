@@ -3,7 +3,6 @@ from watchFaceParser.elements.activityElements.distanceFormattedNumber import Di
 from watchFaceParser.elements.activityElements.pulseFormattedNumber import PulseFormattedNumber
 from watchFaceParser.elements.activityElements.stepsFormattedNumber import StepsFormattedNumber
 from watchFaceParser.elements.activityElements.stepPercentageProgressFormattedNumber import StepPercentageProgressFormattedNumber
-from watchFaceParser.elements.activityElements.testUnknown6ActivityFormattedNumber import Unknown6ActivityFormattedNumber
 
 class Activity:
     definitions = {
