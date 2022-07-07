@@ -10,7 +10,7 @@ class Header:
 
     def __init__(self, unknown, parametersSize):
         self.signature = Header.dialSignature
-        self.unknown = unknown
+        self.unknown = 345 # hard coding ?
         self.parametersSize = parametersSize
 
 
@@ -28,6 +28,8 @@ class Header:
         buffer[32:32+len(t)] = t
         t = self.parametersSize.to_bytes(4, byteorder='little')
         buffer[36:36+len(t)] = t
+
+        logging.debug(f"Header: Signature: {self.signature}, unkown: {self.unknown}, parametersSize: {self.parametersSize}")
 
         self.hackBuffer(0, buffer)
         stream.write(buffer)
