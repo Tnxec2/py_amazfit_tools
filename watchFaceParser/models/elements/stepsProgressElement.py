@@ -15,7 +15,7 @@ class StepsProgressElement(ContainerElement):
             if state.getSteps() >= state.getGoal():
                 self._goalimage.draw3(drawer, images, state)
         if self._linear:
-            self._linear.draw4(drawer, images, state.getSteps(), state.getGoal())
+            self._linear.draw4(drawer, images, state.getSteps(), state.getGoal(), fixCounterStepProgress=True)
         if self._gauge:
             self._gauge.draw3(drawer, images, state)
         if self._circle:

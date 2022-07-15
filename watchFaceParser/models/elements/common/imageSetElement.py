@@ -1,4 +1,5 @@
 ﻿import logging
+
 from watchFaceParser.models.elements.common.imageElement import ImageElement
 
 
@@ -11,8 +12,14 @@ class ImageSetElement(ImageElement):
     def getImagesCount(self):
         return self._imagesCount or 1
 
-    def draw4(self, drawer, resources, value, total):
+    def draw4(self, drawer, resources, value, total, fixCounterStepProgress = False):
         index = int(value / ( total / self._imagesCount))
+        if fixCounterStepProgress:
+            index -= 1;
+        if index < 0:
+            return
+
+        index = min(index, self._imagesCount - 1 - (1 if fixCounterStepProgress else 0))
 
         self.draw3(drawer, resources, index)
 
