@@ -25,7 +25,16 @@ class WatchFace(ContainerElement):
     def draw3(self, drawer, images, state):
         if self._background:
             self._background.draw3(drawer, images, state)
-        
+        if self._time:
+            self._time.draw3(drawer, images, state)
+
+        if self._dateext:
+            self._dateext.draw3(drawer, images, state)
+        if self._date:
+            self._date.draw3(drawer, images, state)
+        if self._weekdayIcon:
+            self._weekdayIcon.draw3(drawer, images, state)
+
         if self._pulseStatus:
             self._pulseStatus.draw3(drawer, images, state)
         if self._paiProgress:
@@ -44,24 +53,15 @@ class WatchFace(ContainerElement):
         if self._activityAlt:
             self._activityAlt.draw3(drawer, images, state)
 
-        if self._weather:
-            self._weather.draw3(drawer, images, state)
-        if self._battery:
-            self._battery.draw3(drawer, images, state)
-
-        if self._dateext:
-            self._dateext.draw3(drawer, images, state)
-        if self._date:
-            self._date.draw3(drawer, images, state)
-        if self._weekdayIcon:
-            self._weekdayIcon.draw3(drawer, images, state)
-        if self._time:
-            self._time.draw3(drawer, images, state)
-        if self._analogDial:
-            self._analogDial.draw3(drawer, images, state)
         if self._status:
             self._status.draw3(drawer, images, state)
-
+        if self._battery:
+            self._battery.draw3(drawer, images, state)
+        if self._weather:
+            self._weather.draw3(drawer, images, state)
+        if self._analogDial:
+            self._analogDial.draw3(drawer, images, state)
+            
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
