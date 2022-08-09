@@ -131,6 +131,8 @@ class Header:
         if  Config.isGtr2Mode() or Config.isGts2Mode() or Config.isTrexProMode():
             if buffer[75-16] == 0x00:
                 Config.setOldFormat(True)
+                logging.info("Old json format for GTS2/GTR2")
+                print("Old json format for GTS2/GTR2")
         return header
     
     @staticmethod
