@@ -4,6 +4,7 @@ class CaloriesElement(CompositeElement):
     def __init__(self, parameter, parent, name = None):
         self._number = None
         self._prefixImageIndex = None
+        self._suffix = None
         super(CaloriesElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
     def draw3(self, drawer, resources, state):
@@ -12,7 +13,8 @@ class CaloriesElement(CompositeElement):
             images.append(resources[self._prefixImageIndex])
         for image in self._number.getImagesForNumber(resources, state.getCalories()):
             images.append(image)
-
+        if self._suffix:
+            images.append(resources[self._suffix])
         from watchFaceParser.helpers.drawerHelper import DrawerHelper
         DrawerHelper.drawImages(drawer, images, self._number.getSpacing(), self._number.getAlignment(), self._number.getBox())
 
@@ -27,5 +29,9 @@ class CaloriesElement(CompositeElement):
             from watchFaceParser.models.elements.basic.valueElement import ValueElement
             self._prefixImageIndex = parameter.getValue()
             return ValueElement(parameter, self, 'PrefixImageIndex')
+        elif parameterId == 3:
+            from watchFaceParser.models.elements.basic.valueElement import ValueElement
+            self._suffix = parameter.getValue()
+            return ValueElement(parameter, self, 'SuffixImageIndex')
         else:
             super(CaloriesElement, self).createChildForParameter(parameter)
