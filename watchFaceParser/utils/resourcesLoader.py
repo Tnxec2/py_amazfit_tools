@@ -138,23 +138,24 @@ class ResourcesLoader:
         return newImageIndex
 
     def loadImage(self, index):
-        assert(type(index) == int)
-        if index in self._mapping:
-            return self._mapping[index]
+        return self.loadImage_orig(index)
+        # assert(type(index) == int)
+        # if index in self._mapping:
+        #     return self._mapping[index]
 
-        logging.debug(f"Request image index {index}...")
-        newImageIndex = None
+        # logging.debug(f"Request image index {index}...")
+        # newImageIndex = None
 
-        for i in range(len(self._resources),index+1): 
-            newImageIndex = i     
-            logging.debug(f"Loading image {newImageIndex}...")
-            #print(f"Loading image {newImageIndex}...")
-            from resources.imageLoader import ImageLoader
-            resource = ImageLoader.loadResourceForNumber(self._imagesDirectory, i )
-            self._resources.append(resource)
-            self._mapping[i ] = newImageIndex
-            #print ("XXXX",index,newImageIndex)
-        return newImageIndex
+        # for i in range(len(self._resources),index+1): 
+        #     newImageIndex = i     
+        #     logging.debug(f"Loading image {newImageIndex}...")
+        #     #print(f"Loading image {newImageIndex}...")
+        #     from resources.imageLoader import ImageLoader
+        #     resource = ImageLoader.loadResourceForNumber(self._imagesDirectory, i )
+        #     self._resources.append(resource)
+        #     self._mapping[i ] = newImageIndex
+        #     #print ("XXXX",index,newImageIndex)
+        # return newImageIndex
  
     def loadImage_orig(self, index):
         assert(type(index) == int)
