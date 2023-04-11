@@ -28,17 +28,26 @@ class TimeElement(ContainerElement):
             self._amPm.draw3(drawer, images, state)
 
         hours = state.getTime().hour if self._amPm is None else state.getTime().hour % 12
-        # drawingOrder = 0x1234 if self.getDrawingOrder() is None else self.getDrawingOrder()
-
-        if self._hours and self._hours.getTens():
-            self._hours.getTens().draw3(drawer, images, int(hours % 100 / 10))
-        if self._hours and self._hours.getOnes():
-            self._hours.getOnes().draw3(drawer, images, hours % 10)
-
-        if self._minutes and self._minutes.getTens():
-            self._minutes.getTens().draw3(drawer, images, int(state.getTime().minute % 100 / 10))
-        if self._minutes and self._minutes.getOnes():
-            self._minutes.getOnes().draw3(drawer, images, state.getTime().minute % 10)
+        
+        if self._drawingOrder:
+            for s in self._drawingOrder:
+                if s == '1' and self._hours and self._hours.getTens():
+                    self._hours.getTens().draw3(drawer, images, int(hours % 100 / 10))
+                if s == '2' and self._hours and self._hours.getOnes():
+                    self._hours.getOnes().draw3(drawer, images, hours % 10)
+                if s == '3' and self._minutes and self._minutes.getTens():
+                    self._minutes.getTens().draw3(drawer, images, int(state.getTime().minute % 100 / 10))
+                if s == '4' and self._minutes and self._minutes.getOnes():
+                    self._minutes.getOnes().draw3(drawer, images, state.getTime().minute % 10)
+        else:
+            if self._hours and self._hours.getTens():
+                self._hours.getTens().draw3(drawer, images, int(hours % 100 / 10))
+            if self._hours and self._hours.getOnes():
+                self._hours.getOnes().draw3(drawer, images, hours % 10)
+            if self._minutes and self._minutes.getTens():
+                self._minutes.getTens().draw3(drawer, images, int(state.getTime().minute % 100 / 10))
+            if self._minutes and self._minutes.getOnes():
+                self._minutes.getOnes().draw3(drawer, images, state.getTime().minute % 10)
 
         if self._seconds:
             self._seconds.draw3(drawer, images, state.getTime().second)
@@ -73,7 +82,10 @@ class TimeElement(ContainerElement):
             self._amPm = AmPmElement(parameter = parameter, parent = self, name = 'AmPm')
             return self._amPm
         elif parameterId == 5:
-            pass
+            from watchFaceParser.models.drawingOrder import DrawingOrder
+            self._drawingOrder = DrawingOrder(parameter.getValue()).toJSON()
+            from watchFaceParser.models.elements.basic.valueElement import ValueElement
+            return ValueElement(parameter = parameter, parent = self, name = 'DrawingOrder')
         elif parameterId == 10:
             from watchFaceParser.models.elements.common.numberElement import NumberElement
             self._sunriseHours = NumberElement(parameter = parameter, parent = self, name = 'SunriseHours')
