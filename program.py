@@ -188,6 +188,9 @@ class Parser:
             from PIL import Image
             new_w, new_h = Config.getPreviewSize(), Config.getPreviewSize()
             im_resized = staticPreview.resize((new_w, new_h), resample = Image.LANCZOS)
+            if Config.isDither():
+                from watchFaceParser.helpers.bipsImageHelper import ImageHelper
+                im_resized = ImageHelper.ditherImage(im_resized)
             im_resized.save(os.path.join(outputDirectory, f"{baseName}_static_{Config.getPreviewSize()}.png"))
             logging.debug("Generating static preview save done...")
 

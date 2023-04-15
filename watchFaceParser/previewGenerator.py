@@ -26,4 +26,8 @@ class PreviewGenerator:
 
         graphics = Image.new('RGBA', (Config.getImageSize(), Config.getImageSize()))
         watchFace.draw3(graphics, resources, state)
-        return graphics
+        if Config.isDither():
+            from watchFaceParser.helpers.bipsImageHelper import ImageHelper
+            return ImageHelper.ditherImage(graphics)
+        else: 
+            return graphics
