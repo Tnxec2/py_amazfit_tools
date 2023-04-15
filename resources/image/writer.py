@@ -7,6 +7,7 @@ import math
 from resources.image.bitwriter import BitWriter
 from watchFaceParser.models.color import Color
 
+
 class Writer:
     signature = bytearray(b'BMd\x00')
 
@@ -21,43 +22,25 @@ class Writer:
     ,'ffaa00' ,'ffaa55' ,'ffaaaa' ,'ffaaff' ,'ffff00' ,'ffff55' ,'ffffaa' ,'ffffff'
     ]
 
+
     def __init__(self, stream):
         self._writer = stream
         self._palleteColorsArray = []
         self._paletteColors = 0
         self._transparency = 0
-
-    def hex_to_tuple(self, s):
-        return [ int(s[:2], 16), int(s[2:4], 16), int(s[4:], 16) ]
-    
-
     
 
     def write(self, image):
-        from PIL import Image, features
-        # palette = [] 
-        # for s in self.bipSColours:
-        #     palette.extend(self.hex_to_tuple(s))
-
-        # p_img = Image.new('P', (16, 16))
-        # p_img.putpalette( palette * 4 )
+        self._width = image.size[0]
+        self._height = image.size[1]
         
         from watchFaceParser.config import Config
-
+      
         if Config.isDither():
-            if features.check_feature(feature="libimagequant"):
-                logging.debug("Dither image with libimagequant method")
-                #self._image = image.convert('RGB').quantize(colors=Config._ditherDepth, method=Image.LIBIMAGEQUANT, palette=p_img, dither=Image.FLOYDSTEINBERG).convert('RGBA')
-                self._image = image.quantize(colors=Config._ditherDepth, method=Image.LIBIMAGEQUANT, dither=Image.FLOYDSTEINBERG).convert('RGBA')
-            else:
-                logging.debug("Dither image with default method")
-                #self._image = image.convert('RGB').quantize(colors=Config._ditherDepth, palette=p_img, dither=Image.FLOYDSTEINBERG).convert('RGBA')
-                self._image = image.quantize(colors=Config._ditherDepth, dither=Image.FLOYDSTEINBERG).convert('RGBA')
+            self._image = self.ditherImage(image)
         else: 
             self._image = image.convert('RGBA')
 
-        self._width = image.size[0]
-        self._height = image.size[1]
 
         self.ExtractPalette()
 
@@ -80,6 +63,43 @@ class Writer:
         self.writeHeader()
         self.writePallete()
         self.writeImage()
+    
+
+    def ditherImage(self, image):
+        from PIL import Image, features
+        transparentCoords = []
+        # save coordinates of transparent pixels in list
+        for y in range(self._height):
+            for x in range(self._width):
+                coordinate = (x, y)
+                pixel_color = image.getpixel(coordinate)
+                (r, g, b, a) = pixel_color
+                if a < 128:
+                    transparentCoords.append(coordinate)
+
+        palette = [] 
+        for s in self.bipSColours:
+            palette.extend(self.hex_to_tuple(s))
+
+        p_img = Image.new('P', (16, 16))
+        p_img.putpalette( palette * 4 )
+
+        if features.check_feature(feature="libimagequant"):
+            logging.debug("Dither image with libimagequant method")
+            image = image.convert('RGB').quantize(method=Image.LIBIMAGEQUANT, palette=p_img, dither=Image.FLOYDSTEINBERG).convert('RGBA')
+        else:
+            logging.debug("Dither image with default method")
+            image = image.convert('RGB').quantize(palette=p_img, dither=Image.FLOYDSTEINBERG).convert('RGBA')
+        # restore transparent pixels
+        for coordinate in transparentCoords:
+            image.putpixel(coordinate, (0, 0, 0, 0))
+        return image
+    
+
+    
+    def hex_to_tuple(self, s):
+        return [ int(s[:2], 16), int(s[2:4], 16), int(s[4:], 16) ]
+    
 
     def ExtractPalette(self):
         logging.debug("Extracting palette...");

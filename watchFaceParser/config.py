@@ -3,7 +3,7 @@ class Config:
     _preview_size = 108
     _dither = True
     _oldBip = False
-    _ditherDepth = 16
+    
 
     @staticmethod
     def getImageSize():
