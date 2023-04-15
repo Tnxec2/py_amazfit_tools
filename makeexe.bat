@@ -1,0 +1,1 @@
+pyinstaller --noconfirm --onefile --console --icon "assets\icons8-smartwatch-32.ico" --distpath "output\bipS"  "main.py"
