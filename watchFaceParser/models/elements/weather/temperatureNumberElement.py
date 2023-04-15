@@ -13,7 +13,6 @@ class TemperatureNumberElement(CompositeElement):
 
     def draw3(self, drawer, resources, number):
         assert(type(resources) == list)
-        logging.debug(number)
         if self._number:
             
             images = []
