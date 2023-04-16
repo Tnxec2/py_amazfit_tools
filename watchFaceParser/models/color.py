@@ -14,6 +14,7 @@ class Color:
 
     @staticmethod
     def fromJSON(strValue):
+        strValue = strValue.lstrip('#')
         v = int(strValue, 16)
         return v
 
