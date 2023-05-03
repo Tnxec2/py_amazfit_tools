@@ -1,7 +1,4 @@
-﻿import logging
-import resource
-
-from watchFaceParser.models.elements.basic.compositeElement import CompositeElement
+﻿from watchFaceParser.models.elements.basic.compositeElement import CompositeElement
 from watchFaceParser.utils.parametersConverter import uint2int
 
 

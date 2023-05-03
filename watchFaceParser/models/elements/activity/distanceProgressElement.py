@@ -5,6 +5,7 @@ from watchFaceParser.models.elements.basic.containerElement import ContainerElem
 class DistanceProgressElement(ContainerElement):
     def __init__(self, parameter, parent = None, name = None):
         self._circle = None
+        self._circle4 = None
         self._icon = None
         super(DistanceProgressElement, self).__init__(parameters = None, parameter = parameter, parent = parent, name = name)
 
@@ -13,6 +14,8 @@ class DistanceProgressElement(ContainerElement):
             self._icon.draw4(drawer, images, state.getDistance(), 4000)
         if self._circle:
             self._circle.draw4(drawer, images, state.getDistance(), 4000)
+        if self._circle4:
+            self._circle4.draw4(drawer, images, state.getDistance(), 4000)
 
     def createChildForParameter(self, parameter):
         parameterId = parameter.getId()
@@ -26,5 +29,9 @@ class DistanceProgressElement(ContainerElement):
             from watchFaceParser.models.elements.common.circularProgressElement import CircularProgressElement # temp.
             self._circle = CircularProgressElement(parameter = parameter, parent = self, name = 'Circle')
             return self._circle
+        elif parameterId == 4:
+            from watchFaceParser.models.elements.common.circularProgressElement import CircularProgressElement # temp.
+            self._circle4 = CircularProgressElement(parameter = parameter, parent = self, name = 'Circle')
+            return self._circle4
         else:
             return super(DistanceProgressElement, self).createChildForParameter(parameter)

@@ -6,5 +6,6 @@ class DistanceProgress:
         
         2: { 'Name': 'Icon', 'Type': ImageSet},
         3: { 'Name': 'Circle', 'Type': CircleScale},
+        4: { 'Name': 'Circle4', 'Type': CircleScale},
     }
 
