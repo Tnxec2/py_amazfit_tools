@@ -24,17 +24,17 @@ class AmPmElement(CoordinatesElement):
         parameterId = parameter.getId()
         from watchFaceParser.models.elements.basic.valueElement import ValueElement
         if parameterId == 3:
-            self._imageIndexAmCn = parameter.getValue()
-            return ValueElement(parameter = parameter, parent = self, name = 'ImageIndexAMCN')
-        elif parameterId == 4:
-            self._imageIndexPmCn = parameter.getValue()
-            return ValueElement(parameter = parameter, parent = self, name = 'ImageIndexPMCN')
-        if parameterId == 5:
             self._imageIndexAmEn = parameter.getValue()
             return ValueElement(parameter = parameter, parent = self, name = 'ImageIndexAMEN')
-        elif parameterId == 6:
+        elif parameterId == 4:
             self._imageIndexPmEn = parameter.getValue()
             return ValueElement(parameter = parameter, parent = self, name = 'ImageIndexPMEN')
+        if parameterId == 5:
+            self._imageIndexAmCn = parameter.getValue()
+            return ValueElement(parameter = parameter, parent = self, name = 'ImageIndexAMCN')
+        elif parameterId == 6:
+            self._imageIndexPmCn = parameter.getValue()
+            return ValueElement(parameter = parameter, parent = self, name = 'ImageIndexPMCN')
         else:
             return super(AmPmElement, self).createChildForParameter(parameter)
 
